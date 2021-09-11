@@ -1,8 +1,13 @@
 # RGB P4 Led Matrix Clock  based on ESP32
-Compact clock has a variety of functions: Perfect time, Alarm, Measurement of temperature, humidity and atmosphere pressure indoors, Forecasting download, Upload submission to MQTT & Thingspeak server, Display of any predetermined information at set time. Clock has low power consumption and provides high display brightness.
+“RGB P4 Led Matrix Clock  based on ESP32” is a multifunctional clock with functions of displaying weather, weather forecast, receiving news feed, displaying any given information at the appointed time. Management is carried out via a web interface or a mobile application. The watch has low power consumption and at the same time provides a high display thanks to the use of RGB matrix panel P4 (62x32).
 
 ------------
-“RGB P4 Led Matrix Clock  based on ESP32” is a multifunctional clock with functions of displaying weather, weather forecast, receiving news feed, displaying any given information at the appointed time. Management is carried out via a web interface or a mobile application. The watch has low power consumption and at the same time provides a high display thanks to the use of RGB matrix panel P4 (62x32).
+# What is a RGB P4 Led Matrix Clock  based on ESP32?
+RGB P4 Led Matrix Clock is a device, based on ESP32 (Mini 32 or 30P WROOM-32) microcontroller is used to output the information received RGB matrix panel P4 256*128mm (62x32) 1/16 Scan.
+An Internet connection via Wi-Fi module helps to synchronize time with NTP server, to receive and display weather and weather forecast, weather icons, today's date in various formats, news, exchange rates, etc. Clock can display predetermined information (reminders, greetings, advertisements, time-schedules etc.) according on schedule.
+RGB matrix panel P4 allows you to display various colorful graphics and animations.
+Clock adjustment and manipulation is performed via WEB-interface or APP LWDevices or LWDevices2.
+
 
 
 # Features include:
