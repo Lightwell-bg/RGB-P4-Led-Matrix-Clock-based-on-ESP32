@@ -94,10 +94,9 @@ All clock management is carried out using a web browser.  On first power-up, RGB
 
 For Wi-Fi network connection please input its SSID and password.  After successful connection P4 Led Matrix Clock will begin to receive and transmit information over the Internet. NTP servers are used to get accurate time. To get the current weather and forecast use the service [https://openweathermap.org](https://openweathermap.org "https://openweathermap.org") (you need to register and get an API key).
 
-![](https://github.com/Lightwell-bg/LWClock/blob/master/images/web-int-01.png)
-![](https://github.com/Lightwell-bg/LWClock/blob/master/images/web-int-02.png)
-![](https://github.com/Lightwell-bg/LWClock/blob/master/images/web-int-03.png)
-![](https://github.com/Lightwell-bg/LWClock/blob/master/images/web-int-04.png)
-![](https://github.com/Lightwell-bg/LWClock/blob/master/images/web-int-05.png)
-![](https://github.com/Lightwell-bg/LWClock/blob/master/images/web-int-06.png)
+![](https://github.com/Lightwell-bg/RGB-P4-Led-Matrix-Clock-based-on-ESP32/blob/main/images/index.png)
+![](https://github.com/Lightwell-bg/RGB-P4-Led-Matrix-Clock-based-on-ESP32/blob/main/images/wifi.png)
+![](https://github.com/Lightwell-bg/RGB-P4-Led-Matrix-Clock-based-on-ESP32/blob/main/images/time.png)
+![](https://github.com/Lightwell-bg/RGB-P4-Led-Matrix-Clock-based-on-ESP32/blob/main/images/setup.png)
+![](https://github.com/Lightwell-bg/RGB-P4-Led-Matrix-Clock-based-on-ESP32/blob/main/images/help.png)
 
