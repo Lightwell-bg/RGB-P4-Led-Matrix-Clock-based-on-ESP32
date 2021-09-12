@@ -85,6 +85,7 @@ The following packages and libraries are used (download and install):
 Editing the Config.h file is optional. SSID and password for Wi-Fi, all API Keys are managed in the Web Interface. It is not required to edit the Config.h file before loading and running the code.
 Open Weather Map free API key: [http://openweathermap.org/](http://openweathermap.org/ "http://openweathermap.org/")  -- this is used to get weather data.
 **NOTE:** The settings in the Config.h are the default settings for the first loading. After loading you can change the settings via the Web Interface or APP. If you want to change settings again in the Config.h, you will need to erase the file system on the Wemos or use the “Reset Settings” option in the Web Interface.
+
 During the first time run MiniID1 ESP-32 will try to connect to your Wi-Fi and fail (because it doesn't have any previously saved Wi-Fi credentials). This will cause it to start up an access point, which serves up a captive configuration portal.
 You can connect to this access point to select and enter credentials for your network. Save configuration and restart device. (MiniID1 ESP-32 will restart and connect to your Wi-Fi network).
 
