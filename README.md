@@ -26,6 +26,17 @@ To power the RGB matrix panel P4 and the controller, you must use any power supp
 - An option to install different alternative Open Source firmware, designed to RGB matrix panel control
 - Hackable: Open source hardware and firmware, Displays information read via UART
 
+### Required Parts:
+- WeMos MiniID1 ESP-32 Wireless WiFi Bluetooth Module [http://alii.pub/4d0l9o](http://alii.pub/4d0l9o "http://alii.pub/4d0l9o") 
+- P4 LED screen panel module 256*128mm 64*32 pixels 1/16 Scan Indoor [http://alii.pub/5zupa1](http://alii.pub/5zupa1 "http://alii.pub/5zupa1")
+- 10uF 25V Capacitor
+- 16 pin male header (2x8)
+- Power supply 5V 8A - $11 from Aliexpress [http://got.by/4d0ngf](http://got.by/4d0ngf "http://got.by/4d0ngf")
+
+**Note:** Using the links provided here help to support these types of projects. Thank you for the support.
+
+You can purchase a PCB with soldered elements and connectors for connecting the indicator and sensors, or just a PCB and a set of elements for installation [RGB Matrix Panel Shield for ESP32](https://diy-led.eu/product/rgb-matrix-panel-shield-for-esp32/ "RGB Matrix Panel Shield for ESP32")
+
 ## Schematics / Assembly
 | Component  | Pins  |  Wemos D1 Mini |
 | ------------ | ------------ | ------------ |
