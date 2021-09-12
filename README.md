@@ -2,7 +2,7 @@
 “RGB P4 Led Matrix Clock  based on ESP32” is a multifunctional clock with functions of displaying weather, weather forecast, receiving news feed, displaying any given information at the appointed time. Management is carried out via a web interface or a mobile application. The watch has low power consumption and at the same time provides a high display thanks to the use of RGB matrix panel P4 (62x32).
 
 ------------
-### ### ## What is a RGB P4 Led Matrix Clock  based on ESP32?What is a RGB P4 Led Matrix Clock  based on ESP32?
+### What is a RGB P4 Led Matrix Clock  based on ESP32?
 **RGB P4 Led Matrix Clock** is a device, based on ESP32 (Mini 32 or 30P WROOM-32) microcontroller is used to output the information received RGB matrix panel P4 256*128mm (62x32) 1/16 Scan.
 An Internet connection via Wi-Fi module helps to synchronize time with NTP server, to receive and display weather and weather forecast, weather icons, today's date in various formats, news, exchange rates, etc. Clock can display predetermined information (reminders, greetings, advertisements, time-schedules etc.) according on schedule.
 RGB matrix panel P4 allows you to display various **colorful graphics** and **animations**.
@@ -10,39 +10,17 @@ Clock adjustment and manipulation is performed via WEB-interface or APP [LWDevic
 To control RGB matrix panel P4 (62x32) the [SmartMatrix by Pixelmatix](https://github.com/pixelmatix/SmartMatrix/tree/teensylc "SmartMatrix by Pixelmatix") library is used.
 To power the RGB matrix panel P4 and the controller, you must use any power supply with a voltage of 5V and a power of more than 15W, since the consumption of one panel when displaying white is about 3 A.
 
-# Features include:
-- Always precise time because of synchronization with NTP time servers
+### Features include:
+- Always precise time because of synchronization with NTP time server
 - High display brightness 
-- Indoor temperature, humidity and barometric pressure measurement
-- Sending temperature, humidity and barometric pressure data to MQTT and Thingspeak.com server
 - Getting a weather information and forecast for your city (temperature, barometric pressure, humidity, cloud and wind structure) 
 - Output of any predetermined information in the form of a creeping line
-- Remote transmission of any text messages via MQTT server and it’s output on the clock
 - No buttons – control the clock via WEB-interface from PC, tablet or smartphone
-- Brightness and output speed of adjustment
-- Two alarm clocks
+- Brightness and output speed adjustment
 - Firmware update via Wi-Fi
 - Information display on 3 languages: English, Russian, Bulgarian
-- Three types of case material: PETG plastic, acryl and wood 
-- Powered via USB
-- Normal USB port or phone charger
-- An option to install different alternative Open Source firmware, designed to MAX7912 matrix control
+- An option to install different alternative Open Source firmware, designed to RGB matrix panel control
 - Hackable: Open source hardware and firmware, Displays information read via UART
-
-## Required Parts:
-- Wemos D1 Mini: http://got.by/40d3u7 
-- Dot Matrix Module MAX7219: http://got.by/40da6v 
-- BME280 Digital Sensor (Temperature, Humidity, Barometric Pressure) 5V: http://got.by/40d52x 
-- TTP223B digital touch capacitive  sensor: http://got.by/40d6kz
-- DS3231 AT24C32 IIC Module Precision Clock http://got.by/42k10g
-- Active Buzzer http://got.by/42k1sg
-- Micro USB Cable: http://got.by/40dbf7 
-- Vinyl Smoke Film Sheet http://got.by/43vkl6
-
-Note: Using the links provided here help to support these types of projects. Thank you for the support.
-
-**You can purchase a PCB with soldered elements and connectors for connecting the indicator and sensors, or just a PCB and a set of elements for installation**
-https://diy.led-lightwell.eu/product/lw-multifunctional-clock-kit/
 
 ## Schematics / Assembly
 | Component  | Pins  |  Wemos D1 Mini |
