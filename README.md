@@ -63,58 +63,35 @@ You can purchase a PCB with soldered elements and connectors for connecting the 
 4. Plug the power wire that came with the display into the power pins of the panel. Attach the power wires to the 2Pin screw terminals on the shield (Pay close attention to the polarity!)
 5. To download the sketch and files connect the device to the computer via USB cable.
 
-## Compiling and Loading to Wemos D1 / Installation
+### Loading Supporting Library Files in Arduino
+Use the Arduino guide for details on how to installing and manage libraries [https://www.arduino.cc/en/Guide/Libraries](https://www.arduino.cc/en/Guide/Libraries "https://www.arduino.cc/en/Guide/Libraries") 
 
-It is recommended to use Arduino IDE. You will need to configure Arduino IDE to work with the Wemos board and USB port and install the required USB drivers.
-1. Install the Arduino IDE
-2. Install the CH340G driver
-3.	In the preferences dialog of the Arduino IDE, add http://arduino.esp8266.com/stable/package_esp8266com_index.json to the Additional Boards Manager URLs
-4.	Open Boards Manager (under Tools), search for and install the latest version of esp8266.
-5. Install the Arduino ESP8266 filesystem uploader plugin (requires restart of IDE)
-6. Load and install used libraries 
-7. Connect your D1 mini to the computer using a micro USB cable
-8. In Tools > Flash Size: select 4M (1M SPIFFS) -- this project requires SPIFFS for saving and reading configuration settings.
-9. Select the Port from the tools menu
-10. Under Tools, select "LOLIN(WEMOS) D1 R2 & mini" as the board
-11. Select Tools > CPU frequency: 80MHz, Flash size: 4M, Debug port: Disabled, Debug level: None, Upload speed: 921600
-12. Open LWClockV1.0.ino
-13. Sketch > Upload
-14. Upload the sketch data files (the data directory in the sketch folder) using Tools > ESP8266 Sketch Data Upload.
-
-## Loading Supporting Library Files in Arduino
-Use the Arduino guide for details on how to installing and manage libraries https://www.arduino.cc/en/Guide/Libraries 
 The following packages and libraries are used (download and install):
-- ArduinoJson by Benoit Blanchon (version 6.13.0)
-- TimeLib by Paul Stoffregen (version 1.5)
-- MD_Parola by majicDesigns (version 3.2.0)
-- MD_MAX72XX by majicDesigns (version 3.2.1)
-- MD_MAXPanel by majicDesigns (version 1.2.3)
-- PubSubClient by Nick O'Leary (version 2.7)
-- RTClib by Adafruit  (version 1.3.3)
-- Adafruit Unified Sensor by Adafruit (version 1.0.3) (for DHT sensor only)
-- DHT sensor library by Adafruit (version 1.3.8) (for DHT sensor only)
-- BlueDot BME280 Library by BlueDot (version 1.0.9)
-- NetCrtESP (version 1.0) https://github.com/Lightwell-bg/NetCrtESP
+- ArduinoJson by Benoit Blanchon [https://github.com/bblanchon/ArduinoJson.git](https://github.com/bblanchon/ArduinoJson.git "https://github.com/bblanchon/ArduinoJson.git")
+- TimeLib by Michael Margolis [https://github.com/PaulStoffregen/Time](https://github.com/PaulStoffregen/Time "https://github.com/PaulStoffregen/Time") 
+- Timezone [https://github.com/JChristensen/Timezone](https://github.com/JChristensen/Timezone "https://github.com/JChristensen/Timezone")
+- RTClib by Adafruit [https://github.com/adafruit/RTClib](https://github.com/adafruit/RTClib "https://github.com/adafruit/RTClib") 
+- SmartMatrix by Pixelmatix [https://github.com/pixelmatix/SmartMatrix/tree/teensylc](https://github.com/pixelmatix/SmartMatrix/tree/teensylc "https://github.com/pixelmatix/SmartMatrix/tree/teensylc")
+- FastLED  [https://github.com/FastLED/FastLED](https://github.com/FastLED/FastLED "https://github.com/FastLED/FastLED")
+- Adafruit GFX Library [https://github.com/adafruit/Adafruit-GFX-Library](https://github.com/adafruit/Adafruit-GFX-Library "https://github.com/adafruit/Adafruit-GFX-Library")
+- ESP32SSDP [https://github.com/luc-github/ESP32SSDP](https://github.com/luc-github/ESP32SSDP "https://github.com/luc-github/ESP32SSDP")
+- NetCrtESP by Lightwell [https://github.com/Lightwell-bg/NetCrtESP](https://github.com/Lightwell-bg/NetCrtESP "https://github.com/Lightwell-bg/NetCrtESP")
+- ESPTimeFunc by Lightwell [https://github.com/Lightwell-bg/ESPTimeFunc](https://github.com/Lightwell-bg/ESPTimeFunc "https://github.com/Lightwell-bg/ESPTimeFunc")
+- weatherAP by Lightwell [https://github.com/Lightwell-bg/weatherAp](https://github.com/Lightwell-bg/weatherAp "https://github.com/Lightwell-bg/weatherAp")
 
-Note: There could be some Issues if using different versions of the libraries.
+**Note:** There could be some issues if using different versions of the libraries.
 
-## Initial Configuration
-Starting with LW-Clock editing the Config.h file is optional. SSID and password for Wi-Fi, all API Keys are managed in the Web Interface. It is not required to edit the Config.h file before loading and running the code.
+### Initial Configuration
+Editing the Config.h file is optional. SSID and password for Wi-Fi, all API Keys are managed in the Web Interface. It is not required to edit the Config.h file before loading and running the code.
+Open Weather Map free API key: [http://openweathermap.org/](http://openweathermap.org/ "http://openweathermap.org/")  -- this is used to get weather data.
+**NOTE:** The settings in the Config.h are the default settings for the first loading. After loading you can change the settings via the Web Interface or APP. If you want to change settings again in the Config.h, you will need to erase the file system on the Wemos or use the “Reset Settings” option in the Web Interface.
+During the first time run MiniID1 ESP-32 will try to connect to your Wi-Fi and fail (because it doesn't have any previously saved Wi-Fi credentials). This will cause it to start up an access point, which serves up a captive configuration portal.
+You can connect to this access point to select and enter credentials for your network. Save configuration and restart device. (MiniID1 ESP-32 will restart and connect to your Wi-Fi network).
 
-Open Weather Map free API key: http://openweathermap.org/  -- this is used to get weather data.
-LW-Clock version 1.0 supports 4 and more Dot Matrix Module MAX7219-- configure in the config.h file.
+### Web Interface
+All clock management is carried out using a web browser.  On first power-up, RGB P4 Led Matrix Clock will serve a hotspot called **LWMC01**. For clock adjustment and manipulation open a webpage with the **192.168.4.1** address. Within this hotspot you can manually override the time and date, set text messages for display, set timecodes of messages output and update software.
 
-**NOTE!!! If you use more than 4 modules you must connect an external power supply with a capacity of 330 mA per each 8x8 module!**
-
-NOTE: The settings in the Config.h are the default settings for the first loading. After loading you can change the settings via the Web Interface. If you want to change settings again in the Config.h, you will need to erase the file system on the Wemos or use the “Reset Settings” option in the Web Interface.
-During the first time run, Wemos D1 mini will try to connect to your Wi-Fi and fail (because it doesn't have any previously saved Wi-Fi credentials). This will cause it to start up an access point, which serves up a captive configuration portal.
-You can connect to this access point to select and enter credentials for your network. Save configuration and restart device. (Wemos  D1 mini will restart and connect to your Wi-Fi network)
-
-
-## Web Interface
-All clock management is carried out using a web browser.  On first power-up, LW-Clock will serve a hotspot called LW-Clock. For clock adjustment and manipulation open a webpage with the 192.168.4.1 address. Within this hotspot you can manually override the time and date, set text messages for display, set timecodes of messages output  and update software.
-
-For Wi-Fi network connection please input its SSID and password.  After successful connection LW-Clock will begin to receive and transmit information over the Internet. NTP servers are used to get accurate time. To get the current weather and forecast use the service https://openweathermap.org (you need to register and get an API key). To transmit temperature, humidity and barometric pressure data you can use the MQTT server https://www.cloudmqtt.com/ and the server https://thingspeak.com. You can also transmit information for display on the clock in the form of a creeping line through the MQTT server.
+For Wi-Fi network connection please input its SSID and password.  After successful connection P4 Led Matrix Clock will begin to receive and transmit information over the Internet. NTP servers are used to get accurate time. To get the current weather and forecast use the service [https://openweathermap.org](https://openweathermap.org "https://openweathermap.org") (you need to register and get an API key).
 
 ![](https://github.com/Lightwell-bg/LWClock/blob/master/images/web-int-01.png)
 ![](https://github.com/Lightwell-bg/LWClock/blob/master/images/web-int-02.png)
@@ -123,27 +100,3 @@ For Wi-Fi network connection please input its SSID and password.  After successf
 ![](https://github.com/Lightwell-bg/LWClock/blob/master/images/web-int-05.png)
 ![](https://github.com/Lightwell-bg/LWClock/blob/master/images/web-int-06.png)
 
-## Three types of case material 
-We designed three types of the clock case, which you can choose to give a device a complete and stylish look.
-First variant is made of black polished acryl, which fits perfectly into modern apartment or office.
-Second variant is made of woodworking industry waste and comes as a retro-style. Different colors and finishes can give a device a unique look which fits into any design of the apartment or office.
-You can order both assembling clock kit and finished case, ready for coloring or other treatment.
-Third variant is made of filaments for 3D-printers (ABS, PETG, PLA etc.). You can make it yourself using a 3D printer and blueprints.
-### Enclosure 3D Model
-https://a360.co/2XeQH2o
-
-https://a360.co/2HCSG9u
-
-https://a360.co/33tJY6v
-
-You can download plywood and acryl blueprints for CNC laser platemaker here https://github.com/Lightwell-bg/LWClock-cases
-
-3D Printed Case https://www.thingiverse.com/thing:3987202
-
-**You can purchase plywood and acryl enclosure cases here:**
-
-https://diy.led-lightwell.eu/product/diy-plywood-enclosure-case-for-lw-clock/
-
-https://diy.led-lightwell.eu/product/diy-black-polished-acryl-enclosure-case-for-lw-clock/
-
-**Link to YouTube** https://youtu.be/VDfjap1s_JY
