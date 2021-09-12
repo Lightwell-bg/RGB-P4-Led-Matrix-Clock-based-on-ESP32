@@ -16,7 +16,6 @@ const String nVersion = "v1.0";
 #include <WiFiUdp.h>
 #include <DNSServer.h> // Captive_Portal
 #include <ESPmDNS.h> // Captive_Portal
-//#include <LittleFS.h>
 #include "SPIFFS.h"
 #include "StreamString.h" //need FOR OUTPUT ERROR when update firmware
 #include <ArduinoJson.h>        //https://github.com/bblanchon/ArduinoJson.git 
@@ -72,7 +71,7 @@ String filePath = "/myconfig.json"; //File for config
 String jsonConfig = "{}";
 // wifi
 String ssid = "****";
-String password = "*****";
+String password = "****";
 String ssidAP = "LWMC01";   // SSID AP точки доступа
 String passwordAP = ""; // пароль точки доступа
 String SSDP_Name = "LWMC01"; // Имя SSDP
@@ -103,13 +102,13 @@ uint8_t fontUsed = 0; //fonts
 bool brauto = false;
 uint8_t dmodefrom = 8, dmodeto = 20; //DAY MODE
 uint8_t brightd = 230, brightn = 100; //brightness day and night
-uint16_t speedTicker = 60; // speed of creeping line
+uint16_t speedTicker = 200; // speed of creeping line
 float global_start = 0, global_stop = 24; //Working time
 bool isBigClock = false;
 float clockBigFrom = 0; float clockBigTo = 24;
 bool showSec = false;
 //ZONE 3
-uint16_t dispStatZ3 = 0b111111111111111;
+uint16_t dispStatZ3 =             0b0000000011111111;
 const uint16_t isLedDateZ3 =      0b0000000000000001;
 const uint16_t isTxtOn0 =         0b0000000000000010;
 const uint16_t isTxtOn1 =         0b0000000000000100;
@@ -122,7 +121,7 @@ const uint16_t isLedForecastZ3 =  0b0000000010000000;
 float newsFromZ3 = 0; float newsToZ3 = 24;
 float dateFromZ3 = 0; float dateToZ3 = 24; float weathFromZ3 = 0; float weathToZ3 = 24; float fcastFromZ3 = 0; float fcastToZ3 = 24;
 bool isCrLineDateZ3 = 1;
-String strText[4] = {"Lighnwell", "Муцы", "Жданоы", "465 7852"};
+String strText[4] = {"Lighgwell", "Screen", "ЫЯФУЙЦ", "465 7852"};
 bool isCrLine[4] = {1, 0, 0, 1}; 
 float txtFrom[4] = {0.3, 1.3, 0, 1}; float txtTo[4] = {24, 24, 23.3, 22};
 uint8_t colorZ3R = 0x40, colorZ3G = 0xff, colorZ3B = 0x00;
@@ -132,7 +131,7 @@ float clockFromZ1=0; float clockToZ1=24;
 uint8_t colorZ1R = 0, colorZ1G = 0xff, colorZ1B = 0x00;
 rgb24 colorZ1 = {colorZ1R, colorZ1G, colorZ1B};
 //ZONE 2
-uint16_t dispStatZ2 = 0b111111111111111;
+uint16_t dispStatZ2 =           0b110000000000001;
 const uint16_t isSecZ2 =        0b0000000000000001;
 const uint16_t isTempZ2 =       0b1000000000000000;
 const uint16_t isWindZ2 =       0b0100000000000000;
@@ -145,9 +144,8 @@ String strWeather = "", strWeatherFcast = "", strSea = "";
 const uint32_t PERIOD_WEATHER_SEND = updInter*60000;
 const uint32_t PERIOD_FORECAST_SEND = updInter*60000*2;
 String weatherHost  = "api.openweathermap.org";
-String  weatherKey    = "3527b31fcfc28604386f2f2079e67ac5"; 
+String  weatherKey    = "****"; 
 String  cityID     = "732770"; // Other city code http://bulk.openweathermap.org/sample/city.list.json.gz
-String seaID = "59";
 const char* overboard[] PROGMEM = {"За бортом ", "Извън борда ", "Overboard "};
 const char* temper[] PROGMEM = {". Темп.", ". Темп.", ". Temp "};
 const char* hum[] PROGMEM = {"~С. Влаж.", "~С. Влаж", "~С. Hum "};
@@ -172,7 +170,7 @@ String weatherTemp = "";
 //NEWS
 const uint32_t PERIOD_NEWS_SEND = updInter*60000*4;
 String newsURL = "newsapi.org";
-String newsAPI = "***********";
+String newsAPI = "********2d987";
 String strNews = ""; 
 //NEWS
 

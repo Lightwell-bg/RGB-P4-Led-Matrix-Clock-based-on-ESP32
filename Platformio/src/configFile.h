@@ -66,7 +66,7 @@ bool loadConfig() {
     weatherHost = root["weatherHost"].as<String>();
     weatherKey = root["weatherKey"].as<String>();
     cityID = root["cityID"].as<String>();
-    seaID = root["seaID"].as<String>();
+    newsAPI = root["newsAPI"].as<String>();
     return true;
 }
 
@@ -120,7 +120,7 @@ bool saveConfig() {
     json["weatherHost"] = weatherHost;
     json["weatherKey"] = weatherKey;
     json["cityID"] = cityID;
-    json["seaID"] = seaID;
+    json["newsAPI"] = newsAPI;
     serializeJson(json, jsonConfig);
     File configFile = SPIFFS.open(filePath, "w");
     if (!configFile) {

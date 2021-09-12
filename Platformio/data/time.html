@@ -3,7 +3,7 @@
     <head>
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
         <meta http-equiv = "Content-type" content = "text/html; charset=utf-8">
-        <title>Led screen ver:2.0</title>
+        <title>RGB P4 Led Matrix Clock based on ESP32</title>
         <link rel="icon" href="./img/favicon.png" type="images/png">
         <link rel = "stylesheet" type = "text/css" href = "/style.css">
         <script type = "text/javascript" src = "/function.js"></script>
@@ -38,16 +38,6 @@
 					return false;
 				}
 			}  
-            /*function set_ntp_auto(submit) {
-                var set_date = new Date();
-                var gmtHours = -set_date.getTimezoneOffset()/60 - (val_sw('isDayLightSaving'));
-                document.getElementById('timezone').value = gmtHours;
-				server = "/TimeZone?timezone=" + val('timezone') + "&isDayLightSaving=" + val_sw('isDayLightSaving');
-                send_request(submit,server);
-				//load_time(submit);
-				load();
-				alert("Ok");
-            }*/
             function sync_time(submit) {
                 server = "/Time";
                 send_request(submit,server);
@@ -228,58 +218,9 @@
                 </select>
                 <br>
                 <span class="save_booton" id="save2" onclick="set_ntp(this);"></span>
-				 
-				<paragraph><span class="opt_cn" id="P_GPSValues"></span></paragraph>
-                    <center>
-                        <table id="table__font" border="1" cellpadding="5" style="border-collapse: collapse; border: 1px solid black;">
-						<tr style="background-color: silver">
-								<th><span class="opt_cn" id="P_GPSParam">Parameter</span></th>
-								<th><span class="opt_cn" id="P_GPSVal">Value</span></th>
-								<!--th><span class="opt_cn" id="P_GPSAge">Age</span></th-->
-						</tr>	
-                        <tr>
-                            <td align="left">GPS wiring status</td>
-							<td>{{gpsLinkStatus}}</td>
-                        </tr>	
-						<tr>
-                            <td align="left">Last update time from GPS</td>
-							<td>{{lastuptimegps}}</td>
-                        </tr>
-						<tr>
-                            <td align="left">Number of synch</td>
-							<td>{{fistSinch}}</td>
-                        </tr>
-                        <tr>
-                            <td align="left">Time is valid</td>
-							<td>{{dtisvalid}}</td>
-                        </tr>						
-                        <tr>
-                            <td align="left">Satellites</td>
-							<td>{{satell}}</td>
-                        </tr>						
-                        <tr>
-                            <td align="left">HDOP</td>
-							<td>{{hdop}}</td>
-						</tr>	
-                        <tr>
-                            <td align="left">GPSTime</td>
-							<td>{{gpstime}}</td>
-						</tr>	
-                        <tr>
-							<td align="left">GPSDate</td>
-							<td>{{gpsdate}}</td>
-						</tr>	
-                        <tr>
-							<td align="left">Location</td>
-							<td>{{gpslocation}}</td>
-						</tr>														
-                        </table>
-						<BR>
-                    </center>				
-                <br>				 
-				 <span class="save_booton" id="P_time_sync" onclick="sync_time(this);"></span>
-                <!--br>
-                 <span class="save_booton" id="P_time_save" onclick="set_ntp_auto(this);"></span><br-->
+				<br> 			 
+				<span class="save_booton" id="P_time_sync" onclick="sync_time(this);"></span>
+ 
             </div>
             <div class="menu_unit" id="langs">
                 <a><span class="ico__text" onclick="set_lang_f(this, 'EN');">EN</span></a>			

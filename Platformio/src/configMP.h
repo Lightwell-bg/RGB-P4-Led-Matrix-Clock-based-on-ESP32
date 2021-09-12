@@ -9,13 +9,17 @@
 //#include <arial_black9pt7b-mm.h>
 #include "logo-diy.c"
 #include  "wind_icon.c" 
-#include "02d.c" //02d
 #include "wbee_icon.c"
+#include "01d.c" //01d
+#include "02d.c" //02d
+#include "01n.c" 
+#include "02n.c" 
 #include "03d.c" //03d
-#include  "01d.c" //01d
 #include  "04d.c" 
 #include  "09d.c" 
 #include  "11d.c" 
+#include  "09n.c" 
+#include  "11n.c" 
 #include  "13d.c" 
 #include  "50d.c" 
 //#include "Heart.c"

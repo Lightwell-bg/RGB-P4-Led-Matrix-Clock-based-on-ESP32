@@ -64,17 +64,3 @@ void getWeatherForecast(uint32_t firstPer, uint32_t nextPer) {
   }
   ms = millis();
 }
-
-void getSeaTemp(uint32_t firstPer, uint32_t nextPer) {
-  static uint32_t ms = 0;
-  static bool firstStep = true;
-  if ((millis() - ms < firstPer) && firstStep) return;
-  if ((millis() - ms < nextPer) && !firstStep) return;
-  if (myWeather.getSeaTemp(seaID.c_str())) {
-      firstStep = false;
-      strSea = tempersea[lang] + myWeather.seaTemp + "~С.";
-      //timeSendSea = myESPTime.getTimeStr(true);
-      Serial.print("strSea: "); Serial.println(strSea);
-  }  
-  ms = millis();
-}

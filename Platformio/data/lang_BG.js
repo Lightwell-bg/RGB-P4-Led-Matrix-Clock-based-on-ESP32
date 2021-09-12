@@ -1,5 +1,5 @@
 var langBG = {
-	header:"LED табло с информер за времето",
+	header:"RGB P4 Led Matrix Clock based on ESP32",
 	//----************FOR NEW ESR32Screen
 	saveSet:"Set",
 	saveSet1:"Set",
@@ -8,6 +8,13 @@ var langBG = {
 	P_led_color2:"Set text color",
 	saveSet3:"Set",
 	P_led_color3:"Set text color",	
+	P_led_zone1:"Зона 1",
+	P_led_showBigClock:"Показывать большие часы",
+	P_led_zone2:"Зона 2",
+	P_led_z2_sec:"Секунды",
+	P_led_z2_temp:"Температура",
+	P_led_z2_wind:"Скорость ветра",
+	P_led_z3_date:"Date",
 	//TOTAL BUTTON and VAR
 	save:"Save",
 	save1:"Save",
@@ -27,7 +34,7 @@ var langBG = {
 	P_led_infOn:"On",
 	P_led_infFrom:"From",
 	P_led_infTo:"To",		
-	P_led_texts:"Text on the screen",
+	P_led_texts:"Текст на табло (Зона 3)",
 	P_led_textOn:"On",
 	P_led_textFrom:"From",
 	P_led_textTo:"to",

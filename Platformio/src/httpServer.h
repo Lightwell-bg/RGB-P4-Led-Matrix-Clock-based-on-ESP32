@@ -15,6 +15,8 @@ void handle_set_z3();
 void handle_LedSetup();
 void handle_Weather();
 void handle_weather_update();
+void handle_Setnews();
+void handle_newsUpdate();
 void handle_set_z2();
 void handle_setcolor_z3();
 void handle_setcolor_z2();
@@ -36,6 +38,8 @@ void init_HTTPServer(void) {
     HTTP.on("/ledsetup", handle_LedSetup); //speed, brightness,
     HTTP.on("/weather", handle_Weather);
     HTTP.on("/weatherUpdate", handle_weather_update);
+    HTTP.on("/setnews", handle_Setnews);
+    HTTP.on("/newsUpdate", handle_newsUpdate);
     HTTP.on("/set_z2", handle_set_z2);
     HTTP.on("/setcolor_z3", handle_setcolor_z3);
     HTTP.on("/setcolor_z2", handle_setcolor_z2);
@@ -139,10 +143,9 @@ void handle_ConfigJSON() {
     json["weatherHost"] = weatherHost;
     json["w_api"] = weatherKey;
     json["city_code"] = cityID;
-    json["sea_id"] = seaID;
+    json["newsAPI"] = newsAPI;
     json["lastupw"] = (millis() - myWeather.lastUpdate)/60000;
     json["lastupwf"] = (millis() - myWeather.fLastUpdate)/60000;
-    json["lastupsea"] = (millis() - myWeather.lastSeaUpdate)/60000;
     root = "";
     serializeJson(json, root);
     HTTP.send(200, "text/json", root);
@@ -379,6 +382,22 @@ void handle_setcolor_z3() {
     colorZ3.red = colorZ3R; colorZ3.green = colorZ3G; colorZ3.blue = colorZ3B;
     saveConfig();
     HTTP.send(200, "text/plain", "OK");       
+}
+
+void handle_Setnews() {
+  newsAPI = HTTP.arg("newsAPI").c_str();
+  saveConfig();                
+  Serial.println("newsAPI: " + newsAPI);
+  HTTP.send(200, "text/plain", "OK"); 
+}
+
+void handle_newsUpdate() {
+  if(HTTP.arg("update") == "ok") {
+    if (isNews & dispStatZ3) strNews = myNews.getNewsWiFiClient(&lang);
+    //strNews = myNews.getNewsHTTPClient(&lang);
+    Serial.print("strNews: "); Serial.println(strNews);
+    HTTP.send(200, "text/plain", "OK");
+  }
 }
 
 void handle_Restart() {

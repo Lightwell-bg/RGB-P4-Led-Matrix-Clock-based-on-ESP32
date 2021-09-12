@@ -4,7 +4,9 @@ void displayZ1(struct tm &tnow) {
 
 void displayZ2(struct tm &tnow) {
     static uint8_t nStep = 1, oldnStep = 0;
+    uint32_t dispTime;
     indexedLayerZ2.setColor(colorZ2);
+    if (dispStatZ2 == 0b0100000000000000) {dispTime = 1000*60*60*60;} else dispTime = 3000;
     //scrollingLayerTextSmall.setColor(colorZ2);
     //indexedLayerZ2.setIndexedColor(1, {colorZ2});
     if (nStep != oldnStep) {/*Serial.print("nStepZ2: "); Serial.println(nStep);*/ oldnStep = nStep;}
@@ -16,8 +18,8 @@ void displayZ2(struct tm &tnow) {
     }
     else if (nStep == 2) {
         if (dispStatZ2 & isTempZ2) {
-            if (weatherTemp.length() > 0) {if (displayWeatherIcon(weatherIcon, 3000)) {nStep++;}}
-            else {if (displayWeatherIcon(255, 3000)) {nStep++;}}
+            if (weatherTemp.length() > 0) {if (displayWeatherIcon(weatherIcon, tnow, 3000)) {nStep++;}}
+            else {if (displayWeatherIcon(255, tnow, 3000)) {nStep++;}}
         }
         else nStep++;
     }
@@ -29,7 +31,7 @@ void displayZ2(struct tm &tnow) {
     }
     else if (nStep == 4) {
         if (dispStatZ2 & isWindZ2 && weatherSpeed.length() > 0) {
-            if (displayWind(3000)) {nStep++;}
+            if (displayWind(dispTime)) {nStep++;}
         }
         else nStep++;
     }
@@ -41,8 +43,10 @@ void displayZ2(struct tm &tnow) {
 
 void displayZ3(struct tm &tnow) {
     static uint8_t nStep = 1, oldnStep = 0;
+    uint32_t dispTime;
     scrollingLayerText.setColor(colorZ3);
     indexedLayerZ3.setColor(colorZ3);
+    if (dispStatZ3 == 1) {dispTime = 1000*60*60*60;} else dispTime = 3000;
     //if (nStep != oldnStep) {Serial.print("nStepZ3: "); Serial.println(nStep); oldnStep = nStep;}
     if (nStep == 1) {
         if ((dispStatZ3 & isLedDateZ3) && myESPTime.compTimeInt(dateFromZ3, dateToZ3, &tnow)) {
@@ -53,7 +57,7 @@ void displayZ3(struct tm &tnow) {
             }
             else {
                 String NowDate = String(tnow.tm_mday) + " "+ monthS_table[lang][tnow.tm_mon] + "," + dayS_table[lang][tnow.tm_wday];
-                if (displayText(NowDate, 2000, FreeSansBold7pt8b)) {nStep++;}
+                if (displayText(NowDate, dispTime, FreeSansBold7pt8b)) {nStep++;}
             }
         }
         else nStep++;
@@ -64,7 +68,7 @@ void displayZ3(struct tm &tnow) {
                 if (displayScrollText(strText[0])) {nStep++;}
             }
             else {
-                if (displayText(strText[0], 2000)) {nStep++;}
+                if (displayText(strText[0], dispTime)) {nStep++;}
             }            
         }
         else nStep++;
@@ -75,7 +79,7 @@ void displayZ3(struct tm &tnow) {
                 if (displayScrollText(strText[1])) nStep++;
             }
             else {
-                if (displayText(strText[1], 2000)) nStep++;
+                if (displayText(strText[1], dispTime)) nStep++;
             }
         }
         else nStep++;
@@ -86,7 +90,7 @@ void displayZ3(struct tm &tnow) {
                 if (displayScrollText(strText[2])) nStep++;
             }
             else {
-                if (displayText(strText[2], 2000)) nStep++;
+                if (displayText(strText[2], dispTime)) nStep++;
             }
         }
         else nStep++;
@@ -97,7 +101,7 @@ void displayZ3(struct tm &tnow) {
                 if (displayScrollText(strText[3])) nStep++;
             }
             else {
-                if (displayText(strText[3], 2000)) nStep++;
+                if (displayText(strText[3], dispTime)) nStep++;
             }
         }
         else nStep++;

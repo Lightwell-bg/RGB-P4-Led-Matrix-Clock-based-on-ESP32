@@ -246,7 +246,7 @@ bool displaySecondsZ2(uint32_t Per = 3000) {
   }
 }
 
-bool displayWeatherIcon(uint8_t codeIcon, uint32_t Per = 3000) {
+bool displayWeatherIcon(uint8_t codeIcon, struct tm &tnow, uint32_t Per = 3000) {
   uint8_t x, y;
   x = 43; y = 0;
   static bool firstStep = true;
@@ -260,10 +260,16 @@ bool displayWeatherIcon(uint8_t codeIcon, uint32_t Per = 3000) {
     case 1:
         //x = (kMatrixWidth / 2) - (w01d.width/2 - 29);
         //y = (kMatrixHeight / 3) - (w01d.height/2 + 2);
-        drawBitmap(x, y, (const gimp32x32bitmap*)&w01d);
+        if (myESPTime.compTimeInt(dmodefrom, dmodeto, &tnow)) {
+          drawBitmap(x, y, (const gimp32x32bitmap*)&w01d);
+        }
+        else drawBitmap(x, y, (const gimp32x32bitmap*)&w01n);
         break;
       case 2:
-        drawBitmap(x, y, (const gimp32x32bitmap*)&w02d);
+        if (myESPTime.compTimeInt(dmodefrom, dmodeto, &tnow)) {
+          drawBitmap(x, y, (const gimp32x32bitmap*)&w02d);
+        }
+        else drawBitmap(x, y, (const gimp32x32bitmap*)&w02n);
         break;
       case 3:
         drawBitmap(x, y, (const gimp32x32bitmap*)&w03d);
@@ -272,13 +278,22 @@ bool displayWeatherIcon(uint8_t codeIcon, uint32_t Per = 3000) {
         drawBitmap(x, y, (const gimp32x32bitmap*)&w04d);
         break;
       case 9:
-        drawBitmap(x, y, (const gimp32x32bitmap*)&w09d);
+        if (myESPTime.compTimeInt(dmodefrom, dmodeto, &tnow)) {
+          drawBitmap(x, y, (const gimp32x32bitmap*)&w09d);
+        }
+        else drawBitmap(x, y, (const gimp32x32bitmap*)&w09n);
         break;
       case 10:
-        drawBitmap(x, y, (const gimp32x32bitmap*)&w09d);
+        if (myESPTime.compTimeInt(dmodefrom, dmodeto, &tnow)) {
+          drawBitmap(x, y, (const gimp32x32bitmap*)&w09d);
+        }
+        else drawBitmap(x, y, (const gimp32x32bitmap*)&w09n);
         break;
       case 11:
-        drawBitmap(x, y, (const gimp32x32bitmap*)&w11d);
+        if (myESPTime.compTimeInt(dmodefrom, dmodeto, &tnow)) {
+          drawBitmap(x, y, (const gimp32x32bitmap*)&w11d);
+        }
+        else drawBitmap(x, y, (const gimp32x32bitmap*)&w11n);
         break;
       case 13:
         drawBitmap(x, y, (const gimp32x32bitmap*)&w13d);

@@ -3,7 +3,7 @@
     <head>
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
         <meta http-equiv = "Content-type" content = "text/html; charset=utf-8">
-        <title>Led screen ver:2.0</title>
+        <title>RGB P4 Led Matrix Clock based on ESP32</title>
         <link rel="icon" href="./img/favicon.png" type="images/png">
         <link rel = "stylesheet" type = "text/css" href = "/style.css">
         <script type = "text/javascript" src = "/function.js"></script>
@@ -191,16 +191,17 @@
                         </tr>
                     </table>
                 </center>
-				<!--paragraph><span class="opt_cn" id="P_led_set"></span></paragraph-->
-                <paragraph><span class="opt_cn">ZONE 1</span></paragraph>
+				<paragraph><span class="opt_cn" id="P_led_zone1"></span></paragraph> <!--ZONE 1-->
                     <center>
                         <table id="table__font">
                         <tr>
+							<td><span class="opt_cn"></span></td>
                             <td><span class="opt_cn" id="P_led_infOn">On</span></td>
                             <td><span class="opt_cn" id="P_led_infFrom">From</span></td>
                             <td><span class="opt_cn" id="P_led_infTo">To</span></td>
                         </tr>						
-                            <tr>  
+                            <tr> 
+								<td><span class="opt_cn" id="P_led_showBigClock"></span></td>
                                 <td><input type="checkbox" id="isBigClock"></td>	
                             <td>
                                 <select id="clockBigFrom">
@@ -306,11 +307,11 @@
 									<option value="24"> 24:00 </option>
                                 </select>
                         <tr>
+							<td><span class="opt_cn" id="P_led_showSec"></td>
 							</td>										
-                                <td colspan=3 align = "left"><input type="checkbox" id="showSec"><span class="opt_cn" id="P_led_showSec"></span>
+                                <td colspan=3 align = "left"><input type="checkbox" id="showSec"></span>
 							</td>
-                        </tr>
-                            							
+                        </tr>                            							
                         </table>
                     </center>				
                 <span class="save_booton" id="save" onclick="set_ledoption(this);"></span>
@@ -334,30 +335,29 @@
                 <span class="save_booton" id="saveSet1" onclick="setcolor_z1(this);"></span>				
 				
 				<br>
-                <!--paragraph><span class="opt_cn" id="P_led_texts">ZONE 2</span></paragraph-->
-				<paragraph><span class="opt_cn">ZONE 2</span></paragraph>
+                <paragraph><span class="opt_cn" id="P_led_zone2"></span></paragraph>  <!--ZONE 2-->
                 <center>
                     <table id="table__font">
                         <tr>
                             <td><span class="opt_cn" id="P_led_textOn">On</span></td>
-							<td><span class="opt_cn" id="P_led_text">Display</span></td>
+							<td><span class="opt_cn"></span></td>
                         </tr>
 						<tr>
                             <td><span><input type="checkbox" id="isSecZ2"></span></td>
                             <td>
-                                Seconds<!--input type="text" class="field" id="ledText0" value="{{ledText0}}" pattern=".{1,255}"-->
+                                <span class="opt_cn" id="P_led_z2_sec"></span>
                             </td>
                         </tr>			
 						<tr>
                             <td><span><input type="checkbox" id="isTempZ2"></span></td>
                             <td>
-                                Temp<!--input type="text" class="field" id="ledText0" value="{{ledText0}}" pattern=".{1,255}"-->
+                                <span class="opt_cn" id="P_led_z2_temp"></span>
                             </td>
                         </tr>			
 						<tr>
                             <td><span><input type="checkbox" id="isWindZ2"></span></td>
                             <td>
-                                Seconds<!--input type="text" class="field" id="ledText0" value="{{ledText0}}" pattern=".{1,255}"-->
+                                <span class="opt_cn" id="P_led_z2_wind"></span>
                             </td>
                         </tr>									
 					</table>
@@ -501,7 +501,7 @@
                             </td>
 							<td><span><input type="checkbox" id="isCrLineDateZ3"></span></td>
                             <td>
-                                Date<!--input type="text" class="field" id="ledText0" value="{{ledText0}}" pattern=".{1,255}"-->
+                                <span class="opt_cn" id="P_led_z3_date"></span>
                             </td>
                         </tr>
 						<tr>
@@ -610,7 +610,7 @@
 									<option value="24"> 24:00 </option>
                                 </select>
                             </td>
-							<td><span><!--input type="checkbox" id="isCrLineDateZ3"--></span></td>
+							<td><span></span></td>
                             <td align = "left">
                                 <span class="opt_cn" id="P_led_weather"></span> ({{lastupw}} min)
                             </td>
@@ -721,7 +721,7 @@
 									<option value="24"> 24:00 </option>
                                 </select>
                             </td>
-							<td><span><!--input type="checkbox" id="isCrLineDateZ3"--></span></td>
+							<td><span></span></td>
                             <td align = "left">
                                 <span class="opt_cn" id="P_led_forecast"></span> ({{lastupwf}} min)
                             </td>
@@ -834,7 +834,7 @@
                             </td>
 							<td><span></span></td>
                             <td align = "left">
-                                <!--span class="opt_cn" id="P_led_forecast"></span--> News ({{lastupwf}} min)
+                                <span class="opt_cn" id="P_led_news"></span> ({{lastupwf}} min)
                             </td>
                         </tr>							
                         <tr>
