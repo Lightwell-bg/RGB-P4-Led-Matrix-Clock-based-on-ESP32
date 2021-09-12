@@ -37,39 +37,31 @@ To power the RGB matrix panel P4 and the controller, you must use any power supp
 
 You can purchase a PCB with soldered elements and connectors for connecting the indicator and sensors, or just a PCB and a set of elements for installation [RGB Matrix Panel Shield for ESP32](https://diy-led.eu/product/rgb-matrix-panel-shield-for-esp32/ "RGB Matrix Panel Shield for ESP32")
 
-## Schematics / Assembly
-| Component  | Pins  |  Wemos D1 Mini |
-| ------------ | ------------ | ------------ |
-| **Dot Matrix Module MAX7219**  |  CS -->|D0 (GPIO16)|
-||CLK -->|D5 (GPIO14)|
-||DIN -->|D7 (GPIO13)|
-||+5V -->||
-||GND --> |   |
-|**DS3231**|SCL -->|D1 (GPIO5)|
-||SDA -->|D2 (GPIO4)|
-||+3V||
-||GND||
-|**BME280**|SCL -->|D1 (GPIO5)|
-||SDA -->|D2 (GPIO4)|
-||+5V||
-||GND||
-|**Buzzer (active)**|+ -->|D8 (GPIO15)|
-||GND||
-|**TTP223B digital touch capacitive  sensor**|Dout -->|D6 (GPIO12)|
-||+5V||
-||GND||
-|**I2C**|CS|D0 (GPIO16)|
-||CLK|D5 (GPIO14)|
-|**UART**|Tx|TX (GPIO1)|
-||Rx|RX (GPIO3)|
-
-[![](https://github.com/Lightwell-bg/LWClock/blob/master/images/Board-sm.png)](https://github.com/Lightwell-bg/LWClock/blob/master/images/Board.png)
+### Schematics / Assembly
+| 16 pin male header  |   | WeMos MiniID1 ESP-32  |  Comment |
+| ------------ | ------------ | ------------ | ------------ |
+| 1  | R0  | IO2  | Red Data  |
+| 2  | G0  |  IO15 (TDO) | Green Data   |
+| 3  |  B0 |  IO4 | Blue Data  |
+| 4  | GND  |GND   | Ground  |
+| 5  |  R1 |  IO16/Rx2 | Red Data  |
+|  6 | G1  | IO27  | Green Data   |
+|  7 | B1  | IO17/Tx2  | Blue Data  |
+| 8  | E  | IO12 (TDI)  | Demux Input E for 64x64 panels  |
+|9   | A  |  IO5 | Demux Input A0  |
+|10   | B  | IO18  | Demux Input A1  |
+| 11  | C  |  IO19 | Demux Input A2  |
+|  12 | D  | IO21  | Demux Input E1, E3 (32x32 panels only)  |
+|  13 | CLK  |IO22   | LED Drivers' Clock  |
+|  14 | STB  | IO26  | LED Drivers' Latch  |
+|  15 | OE  |  IO25 | LED Drivers' Output Enable  |
+|  16 | GND  |  GND | Ground  |
 
 1. Solder the elements on the printed circuit board according to the circuit diagram, instructions and markings placed on the printed circuit board.
-2. Connect the Matrix MAX7219 indicator modules, BME280, Buzzer and TTP223B digital touch capacitive sensor using soldering or connectors.
-3. Fasten the circuit board to the back of the Matrix MAX7219 LED Display Modules using M3 screws and plastic washers.
-4. If you use more than four MAX7219 modules, ALWAYS connect an external 5V power supply with a capacity of 330 mA per each 8x8 module.
-5. To download the sketch and files, connect the device to the computer via USB cable.
+2. Connect the WeMos MiniID1 ESP-32, 16 pin male header using soldering or connectors.
+3. Insert the ribbon cable that came with the display into the "Pout" connector on the PCB, insert the other end into the "Output" connector of the panel.
+4. Plug the power wire that came with the display into the power pins of the panel. Attach the power wires to the 2Pin screw terminals on the shield (Pay close attention to the polarity!)
+5. To download the sketch and files connect the device to the computer via USB cable.
 
 ## Compiling and Loading to Wemos D1 / Installation
 
