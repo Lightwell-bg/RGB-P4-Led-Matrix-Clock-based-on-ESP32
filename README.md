@@ -4,10 +4,14 @@
 ------------
 ### What is a RGB P4 Led Matrix Clock  based on ESP32?
 **RGB P4 Led Matrix Clock** is a device, based on ESP32 (Mini 32 or 30P WROOM-32) microcontroller is used to output the information received RGB matrix panel P4 256*128mm (62x32) 1/16 Scan.
+
 An Internet connection via Wi-Fi module helps to synchronize time with NTP server, to receive and display weather and weather forecast, weather icons, today's date in various formats, news, exchange rates, etc. Clock can display predetermined information (reminders, greetings, advertisements, time-schedules etc.) according on schedule.
 RGB matrix panel P4 allows you to display various **colorful graphics** and **animations**.
+
 Clock adjustment and manipulation is performed via WEB-interface or APP [LWDevices](https://play.google.com/store/apps/details?id=eu.ledlightwell.lwdevices "LWDevices") or [LWDevices2](https://play.google.com/store/apps/details?id=eu.ledlightwell.lwdevices2 "LWDevices2").
+
 To control RGB matrix panel P4 (62x32) the [SmartMatrix by Pixelmatix](https://github.com/pixelmatix/SmartMatrix/tree/teensylc "SmartMatrix by Pixelmatix") library is used.
+
 To power the RGB matrix panel P4 and the controller, you must use any power supply with a voltage of 5V and a power of more than 15W, since the consumption of one panel when displaying white is about 3 A.
 
 ### Features include:
