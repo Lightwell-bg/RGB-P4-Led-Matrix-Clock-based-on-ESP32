@@ -26,6 +26,8 @@ To power the RGB matrix panel P4 and the controller, you must use any power supp
 - An option to install different alternative Open Source firmware, designed to RGB matrix panel control
 - Hackable: Open source hardware and firmware, Displays information read via UART
 
+![](https://github.com/Lightwell-bg/RGB-P4-Led-Matrix-Clock-based-on-ESP32/blob/main/images/P4LMClock02-1.jpg)
+
 ### Required Parts:
 - WeMos MiniID1 ESP-32 Wireless WiFi Bluetooth Module [http://alii.pub/4d0l9o](http://alii.pub/4d0l9o "http://alii.pub/4d0l9o") 
 - P4 LED screen panel module 256*128mm 64*32 pixels 1/16 Scan Indoor [http://alii.pub/5zupa1](http://alii.pub/5zupa1 "http://alii.pub/5zupa1")
@@ -95,6 +97,7 @@ All clock management is carried out using a web browser.  On first power-up, RGB
 For Wi-Fi network connection please input its SSID and password.  After successful connection P4 Led Matrix Clock will begin to receive and transmit information over the Internet. NTP servers are used to get accurate time. To get the current weather and forecast use the service [https://openweathermap.org](https://openweathermap.org "https://openweathermap.org") (you need to register and get an API key).
 
 ![](https://github.com/Lightwell-bg/RGB-P4-Led-Matrix-Clock-based-on-ESP32/blob/main/images/index.png)
+![](https://github.com/Lightwell-bg/RGB-P4-Led-Matrix-Clock-based-on-ESP32/blob/main/images/P4LMClock01-1.jpg) ![](https://github.com/Lightwell-bg/RGB-P4-Led-Matrix-Clock-based-on-ESP32/blob/main/images/P4LMClock03-1.jpg)
 ![](https://github.com/Lightwell-bg/RGB-P4-Led-Matrix-Clock-based-on-ESP32/blob/main/images/wifi.png)
 ![](https://github.com/Lightwell-bg/RGB-P4-Led-Matrix-Clock-based-on-ESP32/blob/main/images/time.png)
 ![](https://github.com/Lightwell-bg/RGB-P4-Led-Matrix-Clock-based-on-ESP32/blob/main/images/setup.png)
