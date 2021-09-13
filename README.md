@@ -18,7 +18,7 @@ To power the RGB matrix panel P4 and the controller, you must use any power supp
 - Always precise time because of synchronization with NTP time server
 - High display brightness 
 - Getting a weather information and forecast for your city (temperature, barometric pressure, humidity, cloud and wind structure) 
-- Output of any predetermined information in the form of a creeping line
+- Output of any predetermined information in the form of text, creeping line, graphic icons
 - No buttons – control the clock via WEB-interface from PC, tablet or smartphone
 - Brightness and output speed adjustment
 - Firmware update via Wi-Fi
