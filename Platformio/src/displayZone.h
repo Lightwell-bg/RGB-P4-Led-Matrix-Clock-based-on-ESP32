@@ -6,7 +6,7 @@ void displayZ2(struct tm &tnow) {
     static uint8_t nStep = 1, oldnStep = 0;
     uint32_t dispTime;
     indexedLayerZ2.setColor(colorZ2);
-    if (dispStatZ2 == 0b0100000000000000) {dispTime = 1000*60*60*60;} else dispTime = 3000;
+    if (dispStatZ2 == 0b0100000000000000) {dispTime = 1000*60*60;} else dispTime = 3000;
     //scrollingLayerTextSmall.setColor(colorZ2);
     //indexedLayerZ2.setIndexedColor(1, {colorZ2});
     if (nStep != oldnStep) {/*Serial.print("nStepZ2: "); Serial.println(nStep);*/ oldnStep = nStep;}
@@ -46,7 +46,7 @@ void displayZ3(struct tm &tnow) {
     uint32_t dispTime;
     scrollingLayerText.setColor(colorZ3);
     indexedLayerZ3.setColor(colorZ3);
-    if (dispStatZ3 == 1) {dispTime = 1000*60*60*60;} else dispTime = 3000;
+    if (dispStatZ3 == 1) {dispTime = 1000*60*15;} else dispTime = 3000;
     //if (nStep != oldnStep) {Serial.print("nStepZ3: "); Serial.println(nStep); oldnStep = nStep;}
     if (nStep == 1) {
         if ((dispStatZ3 & isLedDateZ3) && myESPTime.compTimeInt(dateFromZ3, dateToZ3, &tnow)) {

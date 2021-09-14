@@ -16,6 +16,7 @@ const String nVersion = "v1.0";
 #include <WiFiUdp.h>
 #include <DNSServer.h> // Captive_Portal
 #include <ESPmDNS.h> // Captive_Portal
+//#include <LittleFS.h>
 #include "SPIFFS.h"
 #include "StreamString.h" //need FOR OUTPUT ERROR when update firmware
 #include <ArduinoJson.h>        //https://github.com/bblanchon/ArduinoJson.git 
@@ -70,8 +71,8 @@ newsAp myNews(&ESPclient);
 String filePath = "/myconfig.json"; //File for config
 String jsonConfig = "{}";
 // wifi
-String ssid = "****";
-String password = "****";
+String ssid = "***";
+String password = "***";
 String ssidAP = "LWMC01";   // SSID AP точки доступа
 String passwordAP = ""; // пароль точки доступа
 String SSDP_Name = "LWMC01"; // Имя SSDP
@@ -128,10 +129,10 @@ uint8_t colorZ3R = 0x40, colorZ3G = 0xff, colorZ3B = 0x00;
 rgb24 colorZ3 = {colorZ3R, colorZ3G, colorZ3B};
 //ZONE 1
 float clockFromZ1=0; float clockToZ1=24;
-uint8_t colorZ1R = 0, colorZ1G = 0xff, colorZ1B = 0x00;
+uint8_t colorZ1R = 0, colorZ1G = 0xff, colorZ1B = 0xff;
 rgb24 colorZ1 = {colorZ1R, colorZ1G, colorZ1B};
 //ZONE 2
-uint16_t dispStatZ2 =           0b110000000000001;
+uint16_t dispStatZ2 =           0b1100000000000001;
 const uint16_t isSecZ2 =        0b0000000000000001;
 const uint16_t isTempZ2 =       0b1000000000000000;
 const uint16_t isWindZ2 =       0b0100000000000000;
@@ -140,11 +141,11 @@ rgb24 colorZ2 = {colorZ2R, colorZ2G, colorZ2B};
 
 //WEATHER
 uint8_t updInter = 1; //for web interface optim 10!
-String strWeather = "", strWeatherFcast = "", strSea = ""; 
+String strWeather = "", strWeatherFcast = ""; 
 const uint32_t PERIOD_WEATHER_SEND = updInter*60000;
 const uint32_t PERIOD_FORECAST_SEND = updInter*60000*2;
 String weatherHost  = "api.openweathermap.org";
-String  weatherKey    = "****"; 
+String  weatherKey    = "***"; 
 String  cityID     = "732770"; // Other city code http://bulk.openweathermap.org/sample/city.list.json.gz
 const char* overboard[] PROGMEM = {"За бортом ", "Извън борда ", "Overboard "};
 const char* temper[] PROGMEM = {". Темп.", ". Темп.", ". Temp "};
@@ -170,7 +171,7 @@ String weatherTemp = "";
 //NEWS
 const uint32_t PERIOD_NEWS_SEND = updInter*60000*4;
 String newsURL = "newsapi.org";
-String newsAPI = "********2d987";
+String newsAPI = "***";
 String strNews = ""; 
 //NEWS
 

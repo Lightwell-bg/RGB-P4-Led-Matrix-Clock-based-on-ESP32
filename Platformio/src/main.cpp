@@ -84,10 +84,6 @@ void loop() {
     if ((isLedForecastZ3 & dispStatZ3) && myESPTime.compTimeInt(fcastFromZ3, fcastToZ3, &tnow)) {
         getWeatherForecast(PERIOD_FORECAST_SEND, PERIOD_FORECAST_SEND);
     }
-    if (millis() - tCount > 70000*3) {
-      obtain_subscriber_stats();
-      tCount = millis();
-    }
     if ((isNews & dispStatZ3) && myESPTime.compTimeInt(newsFromZ3, newsToZ3, &tnow)) {
       if (millis() - tCountNews > PERIOD_NEWS_SEND) {
         strNews = myNews.getNewsWiFiClient(&lang);
