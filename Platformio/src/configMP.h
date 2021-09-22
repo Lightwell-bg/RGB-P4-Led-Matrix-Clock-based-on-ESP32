@@ -1,14 +1,15 @@
 #include <gimpbitmap.h>
 //#include <FreeSerifBold10.h>
 #include <FranklinGothicMediumCond15pt7b.h>
-//#include <FreeSans6.h> //RU for date
 #include <FreeSansBold7pt8b.h> //RU for date
-//#include <FreeSansBold6.h> //RU for date
+#include <FreeSansBold6pt8b.h> //RU for date
 #include <FranklinGothicMediumCond9pt7b.h>
 #include <FranklinGothicMediumCond7pt7b.h>
 //#include <arial_black9pt7b-mm.h>
 #include "logo-diy.c"
-#include  "wind_icon.c" 
+//#include  "wind_icon.c" 
+//#include  "wind16.c"
+#include  "wind10.c"
 #include "wbee_icon.c"
 #include "01d.c" //01d
 #include "02d.c" //02d

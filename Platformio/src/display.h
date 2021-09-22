@@ -41,7 +41,7 @@ void clearAllLayer() {
 }
 
 bool displayBigTime(bool showSec = true) {
-  static bool showDOT = true, oldShowDot;
+  static bool showDOT = true, oldShowDot, canClearSec = true;
   static uint32_t lastDot = 0;
   static uint8_t oldMin = 61, oldSec = 61;
   String nTime, nSec;
@@ -68,6 +68,14 @@ bool displayBigTime(bool showSec = true) {
       indexedLayerZ1_1.swapBuffers();
       oldShowDot = showDOT;
       oldSec = tnow.tm_sec;
+      canClearSec = true;
+    }
+  }
+  else {
+    if (canClearSec) {
+      indexedLayerZ1_1.fillScreen(0);
+      indexedLayerZ1_1.swapBuffers();
+      canClearSec = false;
     }
   }
 
@@ -175,7 +183,7 @@ bool displayScrollText(const String &sText) {
   else return true;
 }
 
-bool displayText(const String &sText, uint32_t Per = 3000, const GFXfont usefont = FreeSansBold7pt8b) {
+bool displayText(const String &sText, uint32_t Per = 3000, const GFXfont usefont = FreeSansBold7pt8b, uint8_t offset = 0) { //offset special for date
   static bool firstStep = true;
   static uint32_t curDur;
   if (firstStep) {
@@ -186,7 +194,7 @@ bool displayText(const String &sText, uint32_t Per = 3000, const GFXfont usefont
     uint16_t w, h;
     indexedLayerZ3.getDimensionsOfPrintedString(sText.c_str(), &w, &h);
     //Serial.print(w); Serial.print("x"); Serial.println(h);
-    indexedLayerZ3.drawString((matrix.getScreenWidth()-w)/2, matrix.getScreenHeight() / 2 - 3, 1, sText.c_str());
+    indexedLayerZ3.drawString((matrix.getScreenWidth()-w)/2, matrix.getScreenHeight() / 2 - 3 + offset, 1, sText.c_str());
     indexedLayerZ3.swapBuffers();
     firstStep = false; 
     curDur = millis();
@@ -369,7 +377,7 @@ bool displayWind(uint32_t Per = 3000) {
     indexedLayerZ2.setFont(font5x7);
     indexedLayerZ2.drawString(55, 10, 1, weatherDirection.c_str());
     indexedLayerZ2.swapBuffers();
-    drawBitmap(48, 0, (const gimp32x32bitmap*)&wind_icon);
+    drawBitmap(54, 0, (const gimp32x32bitmap*)&wind10);
     backgroundLayer.swapBuffers();
     /*scrollingLayerTextSmall.setOffsetFromTop(5);
     scrollingLayerTextSmall.setStartOffsetFromLeft(20);

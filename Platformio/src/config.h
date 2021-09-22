@@ -71,8 +71,8 @@ newsAp myNews(&ESPclient);
 String filePath = "/myconfig.json"; //File for config
 String jsonConfig = "{}";
 // wifi
-String ssid = "***";
-String password = "***";
+String ssid = "lightwell";
+String password = "";
 String ssidAP = "LWMC01";   // SSID AP точки доступа
 String passwordAP = ""; // пароль точки доступа
 String SSDP_Name = "LWMC01"; // Имя SSDP
@@ -145,7 +145,7 @@ String strWeather = "", strWeatherFcast = "";
 const uint32_t PERIOD_WEATHER_SEND = updInter*60000;
 const uint32_t PERIOD_FORECAST_SEND = updInter*60000*2;
 String weatherHost  = "api.openweathermap.org";
-String  weatherKey    = "***"; 
+String  weatherKey    = ""; 
 String  cityID     = "732770"; // Other city code http://bulk.openweathermap.org/sample/city.list.json.gz
 const char* overboard[] PROGMEM = {"За бортом ", "Извън борда ", "Overboard "};
 const char* temper[] PROGMEM = {". Темп.", ". Темп.", ". Temp "};
@@ -157,7 +157,7 @@ const char* windir_ru[] PROGMEM = {"С-В ", "В ", "Ю-В ", "Ю ", "Ю-З ", "
 const char* windir_bg[] PROGMEM = {"С-И ", "И ", "Ю-И ", "Ю ", "Ю-З ", "З ", "С-З ", "С "};
 const char* windir_en[] PROGMEM = {"N-E ", "E ", "S-E ", "S ", "S-W ", "W ", "N-W ", "N "};
 const char** windir_table[] PROGMEM = {windir_ru, windir_bg, windir_en};
-const char* windir[] PROGMEM = {"NE ", "E ", "SE ", "S ", "SW ", "W ", "NW ", "N "};
+const char* windir[] PROGMEM = {"NE", "E", "SE", "S", "SW", "W", "NW", "N"};
 const char* cloudstxt[] PROGMEM = {" Обл.", " Обл.", " Cloud "};
 const char* forecast[] PROGMEM = {"Завтра  ", "Утре ", "Tomorrow "};
 const char* tempermin[] PROGMEM = {". Темп.мин ", ". Темп.мин ", ". Temp.min "};
@@ -171,7 +171,7 @@ String weatherTemp = "";
 //NEWS
 const uint32_t PERIOD_NEWS_SEND = updInter*60000*4;
 String newsURL = "newsapi.org";
-String newsAPI = "***";
+String newsAPI = "";
 String strNews = ""; 
 //NEWS
 

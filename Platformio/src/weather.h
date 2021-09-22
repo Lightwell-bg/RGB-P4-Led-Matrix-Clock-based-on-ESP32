@@ -22,7 +22,7 @@ void getWeather(uint32_t firstPer, uint32_t nextPer) {
     else if (myWeather.wDeg >202.5 && myWeather.wDeg <=247.5) {strWeather += windir_table[lang][4];weatherDirection = windir[4];}
     else if (myWeather.wDeg >247.5 && myWeather.wDeg <=292.5) {strWeather += windir_table[lang][5];weatherDirection = windir[5];}
     else if (myWeather.wDeg >292.5 && myWeather.wDeg <=337.5) {strWeather += windir_table[lang][6];weatherDirection = windir[6];}
-    else strWeather += windir_table[lang][7];
+    else {strWeather += windir_table[lang][7]; weatherDirection = windir[7];}
     strWeather += cloudstxt[lang] + String(myWeather.clouds) + "% ";
     Serial.print(F("Get weather: ")); Serial.println(strWeather); 
     //airTemp = (myWeather.temp >= 0? "+" + String(myWeather.temp, 1) : String(myWeather.temp, 1));

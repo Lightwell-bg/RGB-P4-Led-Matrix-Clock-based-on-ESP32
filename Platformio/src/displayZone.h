@@ -57,7 +57,7 @@ void displayZ3(struct tm &tnow) {
             }
             else {
                 String NowDate = String(tnow.tm_mday) + " "+ monthS_table[lang][tnow.tm_mon] + "," + dayS_table[lang][tnow.tm_wday];
-                if (displayText(NowDate, dispTime, FreeSansBold7pt8b)) {nStep++;}
+                if (displayText(NowDate, dispTime, FreeSansBold6pt8b, 3)) {nStep++;}
             }
         }
         else nStep++;
