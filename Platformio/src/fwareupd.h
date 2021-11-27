@@ -23,8 +23,8 @@ void init_firmWareUpdate(void) {
         //size_t content_len = upload.currentSize;
         int cmd = (upload.filename.indexOf("spiffs") > -1) ? U_SPIFFS : U_FLASH;
         Serial.printf("Update: %s\n", upload.filename.c_str());
-        if (!Update.begin()) { //start with max available size
-        //if (!Update.begin(content_len, cmd)) {
+        //if (!Update.begin()) { //start with max available size
+        if (!Update.begin(UPDATE_SIZE_UNKNOWN, cmd)) {
           //Update.printError(Serial);
           updateError = getUpdaterError();
         }

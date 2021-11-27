@@ -6,7 +6,7 @@ void displayZ2(struct tm &tnow) {
     static uint8_t nStep = 1, oldnStep = 0;
     uint32_t dispTime;
     indexedLayerZ2.setColor(colorZ2);
-    if (dispStatZ2 == 0b0100000000000000) {dispTime = 1000*60*60;} else dispTime = 3000;
+    if ((dispStatZ2 & 0xFFFF) == 1) {dispTime = 1000*60*60;} else dispTime = 3000;
     //scrollingLayerTextSmall.setColor(colorZ2);
     //indexedLayerZ2.setIndexedColor(1, {colorZ2});
     if (nStep != oldnStep) {/*Serial.print("nStepZ2: "); Serial.println(nStep);*/ oldnStep = nStep;}
@@ -41,12 +41,15 @@ void displayZ2(struct tm &tnow) {
     //displayBitmap(2500);
 }
 
-void displayZ3(struct tm &tnow) {
+bool displayZ3(struct tm &tnow) {
     static uint8_t nStep = 1, oldnStep = 0;
     uint32_t dispTime;
     scrollingLayerText.setColor(colorZ3);
     indexedLayerZ3.setColor(colorZ3);
-    if (dispStatZ3 == 1) {dispTime = 1000*60*15;} else dispTime = 3000;
+    dispTime = 3000;
+#ifndef USE_OC_MODE
+    if ((dispStatZ3 & 0xFFFF) == 1) {dispTime = 1000*60*15;} else dispTime = 3000;
+#endif
     //if (nStep != oldnStep) {Serial.print("nStepZ3: "); Serial.println(nStep); oldnStep = nStep;}
     if (nStep == 1) {
         if ((dispStatZ3 & isLedDateZ3) && myESPTime.compTimeInt(dateFromZ3, dateToZ3, &tnow)) {
@@ -59,19 +62,23 @@ void displayZ3(struct tm &tnow) {
                 String NowDate = String(tnow.tm_mday) + " "+ monthS_table[lang][tnow.tm_mon] + "," + dayS_table[lang][tnow.tm_wday];
                 if (displayText(NowDate, dispTime, FreeSansBold6pt8b, 3)) {nStep++;}
             }
+            return false;
         }
         else nStep++;
+        return false;
     }
-    if (nStep == 2) {
+    else if (nStep == 2) {
         if ((dispStatZ3 & isTxtOn0) && myESPTime.compTimeInt(txtFrom[0], txtTo[0], &tnow)) {
             if (isCrLine[0]) {
                 if (displayScrollText(strText[0])) {nStep++;}
             }
             else {
                 if (displayText(strText[0], dispTime)) {nStep++;}
-            }            
+            } 
+            return false;           
         }
         else nStep++;
+        return false;
     }
     else if (nStep == 3) {
         if ((dispStatZ3 & isTxtOn1) && myESPTime.compTimeInt(txtFrom[1], txtTo[1], &tnow)) {
@@ -81,8 +88,10 @@ void displayZ3(struct tm &tnow) {
             else {
                 if (displayText(strText[1], dispTime)) nStep++;
             }
+            return false;
         }
         else nStep++;
+        return false;
     }
     else if (nStep == 4) {
         if ((dispStatZ3 & isTxtOn2) && myESPTime.compTimeInt(txtFrom[2], txtTo[2], &tnow)) {
@@ -92,8 +101,10 @@ void displayZ3(struct tm &tnow) {
             else {
                 if (displayText(strText[2], dispTime)) nStep++;
             }
+            return false;
         }
         else nStep++;
+        return false;
     }
     else if (nStep == 5) {
         if ((dispStatZ3 & isTxtOn3) && myESPTime.compTimeInt(txtFrom[3], txtTo[3], &tnow)) {
@@ -103,28 +114,67 @@ void displayZ3(struct tm &tnow) {
             else {
                 if (displayText(strText[3], dispTime)) nStep++;
             }
+            return false;
         }
         else nStep++;
+        return false;
     }
     else if (nStep == 6) {
         if ((isLedWeatherZ3 & dispStatZ3) && myESPTime.compTimeInt(weathFromZ3, weathToZ3, &tnow)) {
             if (displayScrollText(strWeather)) nStep++;
+            return false;
         }
         else nStep++;
+        return false;
     }
     else if (nStep == 7) {
         if ((isLedForecastZ3 & dispStatZ3) && myESPTime.compTimeInt(fcastFromZ3, fcastToZ3, &tnow)) {
             if (displayScrollText(strWeatherFcast)) nStep++;
+            return false;
         }
         else nStep++;
+        return false;
     }
     else if (nStep == 8) {
         if ((isNews & dispStatZ3) && myESPTime.compTimeInt(newsFromZ3, newsToZ3, &tnow)) {
             if (displayScrollText(strNews)) nStep++;
+            return false;
         }
         else nStep++;
+        return false;
     }
+#ifdef USE_OC_MODE
+    else if (nStep == 9) {
+        if (statOC) {
+            if (myESPTime.compTimeInt(openFrom, openTo, &tnow)) {
+                scrollingLayerText.setColor(colorOpen);
+                indexedLayerZ3.setColor(colorOpen);
+                if (lang == 2) {
+                    if (displayText(ocmode_table[lang][0], dispTime)) nStep++;
+                }
+                else {
+                    if (displayScrollText(ocmode_table[lang][0])) nStep++;
+                }
+                return false;
+            }
+            else {
+                scrollingLayerText.setColor(colorClose);
+                indexedLayerZ3.setColor(colorClose);
+                if (lang == 2) {
+                    if (displayText(ocmode_table[lang][1], dispTime)) nStep++;
+                }
+                else {
+                    if (displayScrollText(ocmode_table[lang][1])) nStep++;
+                }
+                return false;
+            }
+        }
+        else nStep++;
+        return false;
+    }
+#endif
     else {
         nStep = 1;
+        return true;
     }
 }

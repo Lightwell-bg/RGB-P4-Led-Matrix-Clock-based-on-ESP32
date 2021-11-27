@@ -35,7 +35,7 @@ bool loadConfig() {
     speedTicker = root["speedTicker"]; 
     global_start = root["global_start"]; global_stop = root["global_stop"];
     speedTicker = root["speedTicker"];
-    modeDisplay = root["modeDisplay"];
+    //modeDisplay = root["modeDisplay"];
     showSec = root["showSec"]; //ZONE BIG
     isBigClock = root["isBigClock"];
     clockBigFrom = root["clockBigFrom"]; clockBigTo = root["clockBigTo"];
@@ -67,6 +67,18 @@ bool loadConfig() {
     weatherKey = root["weatherKey"].as<String>();
     cityID = root["cityID"].as<String>();
     newsAPI = root["newsAPI"].as<String>();
+    googleAPI = root["googleAPI"].as<String>();
+    ytChannelID = root["ytChannelID"].as<String>();
+    channelOn = root["channelOn"];
+    ytVideoID = root["ytVideoID"].as<String>();
+    videoOn = root["videoOn"];
+#ifdef USE_OC_MODE
+    openFrom = root["openFrom"];
+    openTo = root["openTo"];
+    statOC = root["statOC"];
+#endif
+    testYOUTUBE = root["testYOUTUBE"];
+
     return true;
 }
 
@@ -92,7 +104,7 @@ bool saveConfig() {
     json["speedTicker"] = speedTicker;
     json["global_start"] = global_start; json["global_stop"] = global_stop;
     json["speedTicker"] = speedTicker;
-    json["modeDisplay"] = modeDisplay;
+    //json["modeDisplay"] = modeDisplay;
     json["showSec"] = showSec; //ZONE BIG
     json["isBigClock"] = isBigClock;
     json["clockBigFrom"] = clockBigFrom; json["clockBigTo"] = clockBigTo;
@@ -121,6 +133,18 @@ bool saveConfig() {
     json["weatherKey"] = weatherKey;
     json["cityID"] = cityID;
     json["newsAPI"] = newsAPI;
+    json["googleAPI"] = googleAPI;
+    json["ytChannelID"] = ytChannelID;
+    json["channelOn"] = channelOn;
+    json["ytVideoID"] = ytVideoID;
+    json["videoOn"] = videoOn;
+#ifdef USE_OC_MODE
+    json["openFrom"] = openFrom;
+    json["openTo"] = openTo;
+    json["statOC"] = statOC;
+#endif
+    json["testYOUTUBE"] = testYOUTUBE;
+
     serializeJson(json, jsonConfig);
     File configFile = SPIFFS.open(filePath, "w");
     if (!configFile) {

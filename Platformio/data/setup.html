@@ -17,27 +17,7 @@
 				server += "&brauto=" + val_sw('brauto');
                 send_request(submit,server);
 				alert("Ok");
-            }		
-            function set_weather(submit) {
-                server = "/weather?w_api=" + val('w_api') + "&weatherHost=" + val('weatherHost') + "&city_code=" + val('city_code');
-                send_request(submit, server);
-				alert("Ok");
-            }		
-            function set_weather_up(submit) {
-                server = "/weatherUpdate?update=ok";
-                send_request(submit, server);
-				alert("Ok");
-            }
-			function set_news(submit) {
-                server = "/setnews?newsAPI=" + val('newsAPI');
-                send_request(submit, server);
-				alert("Ok");
-            }
-			function set_news_up(submit) {
-                server = "/newsUpdate?update=ok";
-                send_request(submit, server);
-				alert("Ok");
-            }			
+            }				
         </script>
     </head>
     <body onload = "load();">
@@ -52,7 +32,7 @@
                 <a class="link__img" href="/wifi.html"><span class="ico__text">Wifi</span></a>
                 <a class="link__img" href="/time.html"><span class="ico__text">Time</span></a>
                 <a class="link__img" href="/setup.html"><span class="ico__text">Setup</span></a>
-                <a class="link__img" href="/help.html"><span class="ico__text">Help</span></a>
+                <a class="link__img" href="/rdata.html"><span class="ico__text">RData</span></a>
                 <a class="link__img" href="#"><span class="ico__text" onclick="restart(this,'ResetESP?');">Restart</span></a>
             </div>
             <titles>
@@ -144,60 +124,11 @@
 					<span class="save_booton" id="save" onclick="set_led(this);"></span>
 					<br><br>								
                 </center>
-				
-            <titles>
-                <span class="opt_cn" id="P_weather_title"></span>
-            </titles>
-            <div class="informer">
-                <span class="opt_cn" id="P_weather_informer"></span>
-                <a href = "http://openweathermap.org/api" align = "center" target = "_blank" id="P_weather_linkAPI"></a> 
-                <a href = "https://led-lightwell.eu/city_list.txt" align = "center" target = "_blank" id="P_weather_linkID"></a>
-            </div>
-            <div id="main_unit">
-                <center>
-                    <table>
-                        <tr>
-                            <td align = "right"><span class="opt_cn" id="P_weather_server"></span></td>
-                            <td><input type="text" class="field" id="weatherHost" value="{{weatherHost}}" class="form-control" pattern="[0-9a-zA-Z.]{1,32}"></td>
-                        </tr>
-                        <tr>
-                            <td align = "right"><span class="opt_cn" id="P_weather_key"></span></td>
-                            <td><input type="text" class="field" id="w_api" value="{{w_api}}" class="form-control" pattern="[0-9a-zA-Z.]{1,32}"></td>
-                        </tr>
-                        <tr>
-                            <td align = "right"><span class="opt_cn" id="P_weather_ID"></span></td>
-                            <td><input type="text" class="field" id="city_code" value="{{city_code}}" class="form-control" pattern="[0-9]{1,10}"></td>
-                        </tr>
-                    </table>
-                </center>			
-                <span class="save_booton" id="save1" onclick="set_weather(this);"></span>
-                <br>
-                <span class="save_booton" id="P_weather_update" onclick="set_weather_up(this);"></span>				
-				
-            </div>
-<!-- NEWS -->
-            <titles>
-                <span class="opt_cn" id="P_news_title"></span>
-            </titles>
-            <div class="informer">
-                <span class="opt_cn" id="P_news_informer"></span>
-                <a href = "https://newsapi.org/" align = "center" target = "_blank" id="P_news_linkAPI"></a> 
-            </div>
-            <div id="main_unit">
-                <center>
-                    <table>
-                        <tr>
-                            <td align = "right"><span class="opt_cn" id="P_news_key"></span></td>
-                            <td><input type="text" class="field" id="newsAPI" value="{{newsAPI}}" class="form-control" pattern="[0-9a-zA-Z.]{1,32}"></td>
-                        </tr>
-                    </table>
-                </center>		
-                <span class="save_booton" id="save3" onclick="set_news(this);"></span>
-                <br>
-                <span class="save_booton" id="P_news_update" onclick="set_news_up(this);"></span>				
-				
-            </div>
-<!-- NEWS end-->			
+				<div class="informer">
+					<span class="opt_cn" id="P_shop_informer"></span>
+					<a href = "/shop.html" align = "center" target = "_blank" id="P_shop_link"></a>
+				</div>
+			</div>		
             <div class="menu_unit" id="langs">
                 <a><span class="ico__text" onclick="set_lang_f(this, 'EN');">EN</span></a>			
                 <a><span class="ico__text" onclick="set_lang_f(this, 'RU');">RU</span></a>

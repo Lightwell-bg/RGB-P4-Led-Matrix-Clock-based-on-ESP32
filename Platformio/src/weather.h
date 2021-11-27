@@ -30,7 +30,7 @@ void getWeather(uint32_t firstPer, uint32_t nextPer) {
     weatherIcon = myWeather.wIcon.substring(0, 2).toInt();
     //Serial.print("weatherIcon: "); Serial.println(weatherIcon);
     weatherTemp = (myWeather.temp < 0 ? String(myWeather.temp, 0) + "~C" : " " + String(myWeather.temp, 0) + "~C");
-    weatherSpeed = String(myWeather.wSpeed, 0);// + "m/c";
+    weatherSpeed = myWeather.wSpeed < 10 ? " " + String(myWeather.wSpeed, 0) : String(myWeather.wSpeed, 0);// + "m/c";
   }
   //sendToLED(airTemp, '2'); 
   ms = millis();

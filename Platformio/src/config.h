@@ -1,17 +1,26 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-const String nName = "LWClockESP32_"; //"LWScreen_"; //"LWClock_"; 
-const String nVersion = "v1.0";
+const String nName = "LWClockESP32_"; 
+const String nVersion = "v2.0";
 #define USE_RTC false //USE RTC chip DS3231 
 #define USE_DHT false //USE sensor DHT
 #define USE_DS18B20 false //USE sensor DS18B20
+#define USE_OC_MODE // OPEN/CLOSE mode
+//#define TEST_YOUTUBE
+#define USE_ASINCWS true //use ESPAsyncWebServer instead standart
 
 #include <WiFi.h>   
-#include <WebServer.h> 
+#if USE_ASINCWS == true
+  #include <AsyncTCP.h>
+  #include <ESPAsyncWebServer.h>
+  #include "ssdpAWS.h"
+#else
+  #include <WebServer.h> 
+  #include <ESP32SSDP.h>
+#endif
 #include <NetBIOS.h>
-#include <HTTPClient.h>  
-#include <ESP32SSDP.h> 
+#include <HTTPClient.h>   
 #include <Update.h>//for update firmware and SPIFFS
 #include <WiFiUdp.h>
 #include <DNSServer.h> // Captive_Portal
@@ -53,7 +62,12 @@ const String nVersion = "v1.0";
 #endif //BME280 
 String cVersion = nName + nVersion + rtsN + senN;
 
-WebServer HTTP; 
+#if USE_ASINCWS == true
+  AsyncWebServer HTTP(80);
+  ssdpAWS mySSDP(&HTTP);
+#else
+  WebServer HTTP; 
+#endif 
 const uint8_t DNS_PORT = 53;
 DNSServer dnsServer;
 File fsUploadFile; 
@@ -68,11 +82,13 @@ HTTPClient ESPhttp;
 newsAp myNews(&ESPclient);
 //newsAp myNews(&ESPhttp);
 
+bool testYOUTUBE = false; //ON/OFF disp fake stat YT /testyoutube?test=1&testper=30000 (0)
+uint16_t testper = 30000;
 String filePath = "/myconfig.json"; //File for config
 String jsonConfig = "{}";
 // wifi
 String ssid = "lightwell";
-String password = "";
+String password = "0877447225";
 String ssidAP = "LWMC01";   // SSID AP точки доступа
 String passwordAP = ""; // пароль точки доступа
 String SSDP_Name = "LWMC01"; // Имя SSDP
@@ -97,19 +113,20 @@ Timezone localCE(localCEST, localCET);
 const uint32_t PERIOD_TIME_SEND = 1000*60*90;
 
 uint8_t modeDisplay = 2; //
+String startLogo = nName + nVersion + " ";
 
 //Setup for LED
 uint8_t fontUsed = 0; //fonts
 bool brauto = false;
 uint8_t dmodefrom = 8, dmodeto = 20; //DAY MODE
 uint8_t brightd = 230, brightn = 100; //brightness day and night
-uint16_t speedTicker = 200; // speed of creeping line
+uint16_t speedTicker = 250; // speed of creeping line
 float global_start = 0, global_stop = 24; //Working time
 bool isBigClock = false;
 float clockBigFrom = 0; float clockBigTo = 24;
 bool showSec = false;
 //ZONE 3
-uint16_t dispStatZ3 =             0b0000000011111111;
+uint16_t dispStatZ3 =             0b0000000001011111;
 const uint16_t isLedDateZ3 =      0b0000000000000001;
 const uint16_t isTxtOn0 =         0b0000000000000010;
 const uint16_t isTxtOn1 =         0b0000000000000100;
@@ -122,7 +139,7 @@ const uint16_t isLedForecastZ3 =  0b0000000010000000;
 float newsFromZ3 = 0; float newsToZ3 = 24;
 float dateFromZ3 = 0; float dateToZ3 = 24; float weathFromZ3 = 0; float weathToZ3 = 24; float fcastFromZ3 = 0; float fcastToZ3 = 24;
 bool isCrLineDateZ3 = 1;
-String strText[4] = {"Lighgwell", "Screen", "ЫЯФУЙЦ", "465 7852"};
+String strText[4] = {"Lighgwell", "Screen", "ЯЗЫК", ""};
 bool isCrLine[4] = {1, 0, 0, 1}; 
 float txtFrom[4] = {0.3, 1.3, 0, 1}; float txtTo[4] = {24, 24, 23.3, 22};
 uint8_t colorZ3R = 0x40, colorZ3G = 0xff, colorZ3B = 0x00;
@@ -140,12 +157,12 @@ uint8_t colorZ2R = 0xff, colorZ2G = 0xff, colorZ2B = 0x00;
 rgb24 colorZ2 = {colorZ2R, colorZ2G, colorZ2B};
 
 //WEATHER
-uint8_t updInter = 1; //for web interface optim 10!
+uint8_t updInter = 10; //for web interface optim 10!
 String strWeather = "", strWeatherFcast = ""; 
 const uint32_t PERIOD_WEATHER_SEND = updInter*60000;
 const uint32_t PERIOD_FORECAST_SEND = updInter*60000*2;
 String weatherHost  = "api.openweathermap.org";
-String  weatherKey    = ""; 
+String  weatherKey    = "*********"; 
 String  cityID     = "732770"; // Other city code http://bulk.openweathermap.org/sample/city.list.json.gz
 const char* overboard[] PROGMEM = {"За бортом ", "Извън борда ", "Overboard "};
 const char* temper[] PROGMEM = {". Темп.", ". Темп.", ". Temp "};
@@ -171,7 +188,7 @@ String weatherTemp = "";
 //NEWS
 const uint32_t PERIOD_NEWS_SEND = updInter*60000*4;
 String newsURL = "newsapi.org";
-String newsAPI = "";
+String newsAPI = "********";
 String strNews = ""; 
 //NEWS
 
@@ -191,5 +208,56 @@ const char* monthS_ru[] PROGMEM = {"Янв", "Фев", "Мар", "Апр", "Ма
 const char* monthS_bg[] PROGMEM = {"Яну", "Фев", "Мар", "Апр", "Май", "Юни", "Юли", "Авг", "Сеп", "Окт", "Ное", "Дек"};
 const char* monthS_en[] PROGMEM = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 const char** monthS_table[] PROGMEM = {monthS_ru, monthS_bg, monthS_en};
+
+//YOUTUBE
+String host = "api.diy-led.eu";
+String googleAPI = "********";  // API KEY выданный Google 
+String ytChannelID = "*********"; // ID YouTube канала my 
+String ytVideoID = "gmar5g7X_z4"; //my AcInk0otyjk 
+bool channelOn = false, videoOn = true;
+const uint32_t PERIOD_YT_SEND = 60000;
+struct channelStatistics{
+  long viewCount;
+  long commentCount;
+  long subscriberCount;
+  bool hiddenSubscriberCount;
+  long videoCount;
+};
+struct videoStatistics{
+  long viewCount;
+  long likeCount;
+  long dislikeCount;
+  long favoriteCount;
+  long commentCount;
+};
+channelStatistics channelStats, oldchannelStats;
+videoStatistics videoStats, oldvideoStats;
+//oldchannelStats = (channelStatistics) {0,0,0,0,0};
+//oldvideoStats = (videoStatistics) {0,0,0,0,0};
+const char* youtube_ru[] PROGMEM = {"КАНАЛ подписчики: ", ", просмотры: ", ", комментарии: ", "ВИДЕО лайки: "};
+const char* youtube_bg[] PROGMEM = {"КАНАЛ подписчики: ", ", просмотры: ", ", комментарии: ", "ВИДЕО лайки: "};
+const char* youtube_en[] PROGMEM = {"CHANNEL subscribers: ", ", views: ", ", comments: ", "VIDEO likes: "};
+const char** youtube_table[] PROGMEM = {youtube_ru, youtube_bg, youtube_en};
+enum statTypeDisp {
+  CHANNEL_SUBCR,
+  CHANNEL_VIEW,
+  CHANNEL_COMMENT,
+  VIDEO_VIEW,
+  VIDEO_LIKE,
+  VIDEO_COMMENT,
+};
+statTypeDisp curTypeDisp = VIDEO_LIKE;
+
+// OPEN/CLOSE
+#ifdef USE_OC_MODE
+const char* ocmode_ru[] PROGMEM = {"ОТКРЫТО", "ЗАКРЫТО"};
+const char* ocmode_bg[] PROGMEM = {"ОТВОРЕНО", "ЗАТВОРЕНО"};
+const char* ocmode_en[] PROGMEM = {"OPEN", "CLOSE"};
+const char** ocmode_table[] PROGMEM = {ocmode_ru, ocmode_bg, ocmode_en};
+bool statOC = true;
+float openFrom = 9.3, openTo = 18.3; //, closeFrom = 18.3, closeTo = 9.3;
+rgb24 colorOpen = {0x00, 0xff, 0x00}, colorClose = {0xff, 0x00, 0x00};
+#endif
+
 
 #endif

@@ -7,8 +7,6 @@
 #include <FranklinGothicMediumCond7pt7b.h>
 //#include <arial_black9pt7b-mm.h>
 #include "logo-diy.c"
-//#include  "wind_icon.c" 
-//#include  "wind16.c"
 #include  "wind10.c"
 #include "wbee_icon.c"
 #include "01d.c" //01d
@@ -23,10 +21,12 @@
 #include  "11n.c" 
 #include  "13d.c" 
 #include  "50d.c" 
-//#include "Heart.c"
-//#include "3d_bar_chart.c"
-//#include "Alarm_clock.c"
-//#include "Bee.c"
+#include "heart16.c"
+#include "heart32.c"
+#include "bell16.c"
+#include "bell32.c"
+#include "youtube16.c"
+#include "youtube32.c"
 #define COLOR_DEPTH 24                  // Choose the color depth used for storing pixels in the layers: 24 or 48 (24 is good for most sketches - If the sketch uses type `rgb24` directly, COLOR_DEPTH must be 24)
 const uint16_t kMatrixWidth = 64;       // Set to the width of your display, must be a multiple of 8
 const uint16_t kMatrixHeight = 32;      // Set to the height of your display

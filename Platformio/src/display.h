@@ -158,7 +158,7 @@ bool displayScrollText(const String &sText) {
   static bool firstStep = true;
   if (sText.length() > 0) {
       if (firstStep) {
-        Serial.print("scrollingLayerText: "); Serial.println(sText);
+        //Serial.print("scrollingLayerText: "); Serial.println(sText);
         scrollingLayerText.setOffsetFromTop(17);
         scrollingLayerText.setFont(&FreeSansBold7pt8b);
         //scrollingLayerText.setColor({0, 0, 0xff});
@@ -187,7 +187,7 @@ bool displayText(const String &sText, uint32_t Per = 3000, const GFXfont usefont
   static bool firstStep = true;
   static uint32_t curDur;
   if (firstStep) {
-    Serial.print("indexedLayerZ3Text: "); Serial.println(sText);
+    //Serial.print("indexedLayerZ3Text: "); Serial.println(sText);
     indexedLayerZ3.fillScreen(BLACK);
     //indexedLayerZ3.setFont(&FreeSansBold7pt8b);
     indexedLayerZ3.setFont(&usefont);
@@ -372,7 +372,7 @@ bool displayWind(uint32_t Per = 3000) {
     indexedLayerZ2.fillScreen(BLACK);
     indexedLayerZ2.setFont(&FranklinGothicMediumCond7pt7b);
     //indexedLayerZ2.setColor({0xff, 0, 0xff});
-    indexedLayerZ2.drawString(37, matrix.getScreenHeight() / 2 - 17, 1, weatherSpeed.c_str());
+    indexedLayerZ2.drawString(39, matrix.getScreenHeight() / 2 - 17, 1, weatherSpeed.c_str());
     //indexedLayerZ2.swapBuffers();
     indexedLayerZ2.setFont(font5x7);
     indexedLayerZ2.drawString(55, 10, 1, weatherDirection.c_str());
@@ -520,61 +520,3 @@ void drawBitmap(int16_t x, int16_t y, const gimp32x32bitmap* bitmap) {
     }
   }
 }
-
-//DSTE
-/*struct tm tnow = myESPTime.getTimeStruct();
-  scrollingLayerText.setOffsetFromTop(defaultScrollOffset);
-  scrollingLayerText.setFont(&FreeSans6pt8b);
-  scrollingLayerText.setColor({0, 0, 0xff});
-  //scrollingLayerText.setMode(wrapForward);
-  scrollingLayerText.setMode(wrapForwardFromLeft);
-  scrollingLayerText.setSpeed(60);
-  String NowDate = String(tnow.tm_mday)+" "+month_table[lang][tnow.tm_mon] +" "+String(tnow.tm_year + 1900) + ", " + day_table[lang][tnow.tm_wday];
-  NowDate.toLowerCase();
-  if(scrollingLayerText.start(NowDate.c_str(), -1) < 0)    Serial.println("Layer 00 text doesn't fit");*/
-
-
-/*bool displayTime(uint16_t duration = 4000, bool showSec = true) {
-  static bool showDOT = true, firstStep = true;
-  static uint32_t lastDot = 0, curDur;
-  String nTime, nSec;
-  if (firstStep) {
-    //lastDot = millis();
-    curDur = millis();
-    struct tm tnow = myESPTime.getTimeStruct();
-    nTime = (tnow.tm_hour<10 ? "0" + String(tnow.tm_hour) : String(tnow.tm_hour))  + (showDOT ? ":" : " ") + (tnow.tm_min<10 ? "0" + String(tnow.tm_min) : String(tnow.tm_min));
-    indexedLayerZ1.drawString(3, matrix.getScreenHeight() / 2 - 19, 1, nTime.c_str());
-    indexedLayerZ1.swapBuffers();
-    nSec = (tnow.tm_sec<10 ? "0" + String(tnow.tm_sec) : String(tnow.tm_sec));
-    backgroundLayer.setFont(font5x7);
-    backgroundLayer.fillScreen(0);
-    backgroundLayer.drawString(54, matrix.getScreenHeight() / 2 + 12, {0, 0xff, 0}, nSec.c_str());
-    backgroundLayer.swapBuffers();
-    //showDOT = !showDOT;
-    firstStep = false;
-    return false;
-  }
-  else {
-    if (millis() - curDur < duration) {
-      if (millis() - lastDot >= 750) {
-        struct tm tnow = myESPTime.getTimeStruct();
-        nTime = (tnow.tm_hour<10 ? "0" + String(tnow.tm_hour) : String(tnow.tm_hour))  + (showDOT ? ":" : " ") + (tnow.tm_min<10 ? "0" + String(tnow.tm_min) : String(tnow.tm_min));
-        indexedLayerZ1.fillScreen(0);
-        indexedLayerZ1.drawString(3, matrix.getScreenHeight() / 2 - 19, 1, nTime.c_str());
-        indexedLayerZ1.swapBuffers();
-        nSec = (tnow.tm_sec<10 ? "0" + String(tnow.tm_sec) : String(tnow.tm_sec));
-        backgroundLayer.setFont(font5x7);
-        backgroundLayer.fillScreen(0);
-        backgroundLayer.drawString(54, matrix.getScreenHeight() / 2 + 12, {0, 0xff, 0}, nSec.c_str());
-        backgroundLayer.swapBuffers();
-        showDOT = !showDOT;
-        lastDot = millis();
-      }
-      return false;      
-    }
-    else {
-      firstStep = true;
-      return true;
-    } 
-  }
-}*/

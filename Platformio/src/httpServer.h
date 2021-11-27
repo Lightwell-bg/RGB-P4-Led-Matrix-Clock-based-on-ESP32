@@ -1,4 +1,3 @@
-//void init_SSDP(void);
 void handleNotFound();
 String getContentType(String filename);
 bool handleFileRead(String path);
@@ -22,6 +21,11 @@ void handle_setcolor_z3();
 void handle_setcolor_z2();
 void handle_setcolor_z1();
 void handle_screenoption();
+void handle_youtube();
+#ifdef USE_OC_MODE
+void handle_shop();
+#endif
+void handle_testyoutube();
 
 void init_HTTPServer(void) {
     HTTP.serveStatic("/", SPIFFS, "/index.html");
@@ -45,7 +49,11 @@ void init_HTTPServer(void) {
     HTTP.on("/setcolor_z2", handle_setcolor_z2);
     HTTP.on("/setcolor_z1", handle_setcolor_z1);
     HTTP.on("/screenoption", handle_screenoption);
-
+    HTTP.on("/setyoutube", handle_youtube);
+    HTTP.on("/testyoutube", handle_testyoutube);
+#ifdef USE_OC_MODE
+    HTTP.on("/shopopenclose", handle_shop);
+#endif
     //HTTP.on("/generate_204", handleRoot);  //Android captive portal. Maybe not needed. Might be handled by notFound handler.
     //HTTP.on("/fwlink", handleRoot);  //Microsoft captive portal. Maybe not needed. Might be handled by notFound handler.
     HTTP.onNotFound([]() {handleNotFound();});  // Captive_Portal ********************************       
@@ -104,7 +112,7 @@ void handle_ConfigJSON() {
     json["global_start"] = global_start; json["global_stop"] = global_stop;
     json["fontUsed"] = fontUsed; 
     json["brightd"] = brightd; json["brightn"] = brightn;
-    json["brauto"] = brauto;
+    json["brauto"] = (brauto?"checked":"");
     json["dmodefrom"] = dmodefrom; json["dmodeto"] = dmodeto;
     json["speedTicker"] = speedTicker;
     json["modeDisplay"] = modeDisplay;
@@ -146,6 +154,17 @@ void handle_ConfigJSON() {
     json["newsAPI"] = newsAPI;
     json["lastupw"] = (millis() - myWeather.lastUpdate)/60000;
     json["lastupwf"] = (millis() - myWeather.fLastUpdate)/60000;
+    json["googleAPI"] = googleAPI;
+    json["ytChannelID"] = ytChannelID;
+    json["channelOn"]=(channelOn?"checked":"");
+    json["ytVideoID"] = ytVideoID;
+    json["videoOn"] = (videoOn?"checked":"");
+#ifdef USE_OC_MODE
+    json["openFrom"] = openFrom;
+    json["openTo"] = openTo;
+    json["statOC"] = (statOC?"checked":"");
+#endif
+    json["testYOUTUBE"] = (testYOUTUBE?"TEST MODE":"");
     root = "";
     serializeJson(json, root);
     HTTP.send(200, "text/json", root);
@@ -192,11 +211,6 @@ void handle_time_zone() {
         myESPTime.setTimeParam(false, timezone, isDayLightSaving, sNtpServerName);
         myESPTime.timeSynch();
     }
-#if USE_GPS == true
-    if (typeSync == 2) {//GPS
-        timeSynchGPS(0, 0);
-    }
-#endif
     Serial.println("NTP Time Zone: " + String(timezone) + ",  isDayLightSaving: " + String(isDayLightSaving));
     HTTP.send(200, "text/plain", "OK");
 }
@@ -205,22 +219,15 @@ void handle_ntp_server() {
     uint8_t oldtypeSync = typeSync;           
     sNtpServerName = HTTP.arg("ntpserver").c_str(); 
     typeSync = HTTP.arg("use_sync").toInt();
-#if USE_GPS != true
     if (typeSync == 2) {//GPS but no
         typeSync = oldtypeSync;
     }
-#endif  
     saveConfig();
     if (typeSync == 1) { //NTP
         //myESPTime.setTimeParam(useRTC, timezone, isDayLightSaving, sNtpServerName);
         //myESPTime.timeSynch();
         myESPTime.begin(timezone, isDayLightSaving, sNtpServerName, sNtpServerName2, sNtpServerName3, false, false);
     }
-#if USE_GPS == true
-    if (typeSync == 2) {//GPS
-        timeSynchGPS(0, 0);
-    }
-#endif
     Serial.println("sNtpServerName: " + sNtpServerName + ", typeSync: " + typeSync);
     HTTP.send(200, "text/plain", "OK");
 }
@@ -229,11 +236,6 @@ void handle_Time() {
     if (typeSync == 1) { //NTP
         myESPTime.timeSynch();
     }
-#if USE_GPS == true
-    if (typeSync == 2) {//GPS
-        timeSynchGPS(0, 0);
-    }
-#endif
     HTTP.send(200, "text/plain", "OK"); 
 }
 
@@ -374,6 +376,8 @@ void handle_set_z3() { //for ZONE 3
     //Serial.print("isTxtOn1 ");Serial.println(isTxtOn1);Serial.println(txtFrom1);Serial.println(txtTo1);Serial.println(isCrLine1);
     //Serial.print("isTxtOn2 ");Serial.println(isTxtOn2);Serial.println(txtFrom2);Serial.println(txtTo2);Serial.println(isCrLine2);
     //Serial.print("isTxtOn3 ");Serial.println(isTxtOn3);Serial.println(txtFrom3);Serial.println(txtTo3);Serial.println(isCrLine3);
+    indexedLayerZ3.fillScreen(BLACK);
+    indexedLayerZ3.swapBuffers();
     HTTP.send(200, "text/plain", "OK"); 
 }
 
@@ -400,6 +404,36 @@ void handle_newsUpdate() {
   }
 }
 
+void handle_youtube() {
+  googleAPI = HTTP.arg("googleAPI").c_str();
+  ytChannelID = HTTP.arg("ytChannelID").c_str(); 
+  ytVideoID = HTTP.arg("ytVideoID").c_str();
+  HTTP.arg("channelOn").toInt()==1?channelOn=true:channelOn=false;
+  HTTP.arg("videoOn").toInt()==1?videoOn=true:videoOn=false;
+  saveConfig();                
+  //getWeather(1000);
+  Serial.println("googleAPI: " + googleAPI + ", ytChannelID: " + ytChannelID + ", ytVideoID: " + ytVideoID);
+  HTTP.send(200, "text/plain", "OK"); 
+}
+
+void handle_testyoutube() {
+    HTTP.arg("test").toInt()==1?testYOUTUBE=true:testYOUTUBE=false;
+    testper =  HTTP.arg("testper").toInt();
+    saveConfig();
+    Serial.println(testYOUTUBE ? "testYOUTUBE: ON" : "testYOUTUBE: OFF");
+    HTTP.send(200, "text/plain", "OK");
+}
+
+#ifdef USE_OC_MODE
+void handle_shop() {
+    openFrom = HTTP.arg("openFrom").toFloat(); openTo = HTTP.arg("openTo").toFloat();
+    (HTTP.arg("statOC").toInt()==1 ?  statOC = true : statOC = false);
+    saveConfig();                 
+    Serial.print("statOC ");Serial.println(statOC);
+    HTTP.send(200, "text/plain", "OK");
+}
+#endif
+
 void handle_Restart() {
   String restart = HTTP.arg("device");       
   if (restart == "ok") {                      
@@ -415,7 +449,7 @@ void handle_resetConfig() {
   String restart = HTTP.arg("device");
   if(restart == "ok") {
     //SPIFFS.format();
-    SPIFFS.remove("/myconfig.json");
+    SPIFFS.remove(filePath);
     Serial.println("ESP erase Config file");
     delay(3000);
     HTTP.send(200, "text/plain", "OK");
