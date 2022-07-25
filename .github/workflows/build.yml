@@ -28,4 +28,4 @@ jobs:
         python -m pip install --upgrade pip
         pip install --upgrade platformio
     - name: Run PlatformIO
-      run: pio run
+      run: pio run -d Platformio
