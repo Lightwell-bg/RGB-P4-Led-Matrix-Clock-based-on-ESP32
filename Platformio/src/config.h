@@ -33,7 +33,7 @@ const String nVersion = "v2.0";
 #include <Timezone.h>           //https://github.com/JChristensen/Timezone
 #include "NetCrtESP.h"
 #include "ESPTimeFunc.h"
-#include "weatherAP.h"
+#include "weatherAp.h"
 #include "newsAp.h"
 #define USE_ADAFRUIT_GFX_LAYERS
 #include <MatrixHardware_ESP32_V0.h>                // This file contains multiple ESP32 hardware configurations, edit the file to define GPIOPINOUT (or add #define GPIOPINOUT with a hardcoded number before this #include)
